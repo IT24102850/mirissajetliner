@@ -3,18 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+  <meta name="description" content="Explore all the exciting marine activities offered by Mirissa Jetliner, from whale watching to snorkeling adventures." />
   <link rel="icon" type="image/x-icon" href="./images/gallery/favicon.ico" />
-  <title>Contact Us - Mirissa Jetliner</title>
-  <meta name="description" content="Contact Mirissa Jetliner for bookings, enquiries and group tours. Email or call our team to plan your whale watching adventure." />
-  <link rel="canonical" href="https://mirissajetliner.com/contact-us.html" />
-  <meta property="og:title" content="Contact Us - Mirissa Jetliner" />
-  <meta property="og:description" content="Get in touch with Mirissa Jetliner for booking whale watching tours, snorkeling and custom packages." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://mirissajetliner.com/contact-us.html" />
-  <meta property="og:image" content="https://mirissajetliner.com/public/images/whale303.jpg" />
+  <meta name="theme-color" content="#030d13" />
+  <meta property="og:title" content="Our Activities — Mirissa Jetliner" />
+  <meta property="og:description" content="Discover premium whale watching, dolphin tours, and other marine adventures with Mirissa Jetliner." />
+  <meta property="og:image" content="./images/whale303.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <title>Our Activities — Mirissa Jetliner</title>
   <style>
     /* ===== RESET & VARIABLES (mirror index) ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -182,151 +181,65 @@
       box-shadow: 0 0 10px rgba(243,163,92,0.5);
     }
 
-    /* Contact Card */
-    .contact-card {
+    /* Activities Grid */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .activity-card {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 24px 32px;
-      display: inline-flex;
-      flex-direction: column;
-      gap: 8px;
-      text-align: center;
+      padding: 28px 24px;
       backdrop-filter: blur(4px);
       box-shadow: var(--shadow-glow);
-      margin: 24px auto 0;
       transition: all .3s ease;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
     }
-    .contact-card:hover {
-      transform: translateY(-3px);
+    .activity-card:hover {
+      transform: translateY(-5px);
       background: var(--card-hover);
       border-color: rgba(223, 243, 240, 0.2);
     }
-    .contact-card span {
-      font-family: var(--mono);
-      font-size: 14px;
-      color: var(--mist);
+    .activity-card .icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+      line-height: 1;
     }
-    .contact-card span:first-child {
-      color: var(--dawn-soft);
-      font-size: 16px;
-    }
-
-    /* Contact Grid */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      margin-top: 40px;
-      align-items: start;
-    }
-
-    /* Form */
-    .contact-form {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 32px 28px;
-      backdrop-filter: blur(4px);
-      box-shadow: var(--shadow-glow);
-    }
-    .contact-form h3 {
+    .activity-card h3 {
       font-family: var(--display);
-      font-size: 24px;
+      font-size: 22px;
       color: var(--dawn-soft);
       font-weight: 500;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
-    .contact-form label {
-      font-size: 13px;
+    .activity-card p {
       color: var(--mist);
-      display: block;
-      margin-bottom: 4px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: rgba(3, 13, 19, 0.5);
-      color: var(--foam);
-      font-family: var(--body);
-      font-size: 14px;
-      transition: border-color .3s ease;
+      font-size: 15px;
       margin-bottom: 16px;
+      flex-grow: 1;
     }
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: var(--dawn);
-      outline: none;
-    }
-    .contact-form textarea {
-      height: 120px;
-      resize: vertical;
-    }
-    .contact-form .btn {
-      padding: 14px 32px;
+    .activity-card .btn {
+      padding: 12px 28px;
       border-radius: 999px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       transition: all .3s ease;
       display: inline-block;
       border: 1px solid transparent;
-      cursor: pointer;
       background: var(--dawn);
       color: var(--abyss);
-      width: 100%;
+      align-self: center;
     }
-    .contact-form .btn:hover {
+    .activity-card .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 26px -8px rgba(243,163,92,0.6);
-    }
-    .contact-form .note {
-      font-size: 12px;
-      color: var(--mist);
-      margin-top: 12px;
-      text-align: center;
-      font-family: var(--mono);
-    }
-
-    /* Map */
-    .map-section {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 28px;
-      backdrop-filter: blur(4px);
-      box-shadow: var(--shadow-glow);
-    }
-    .map-section h3 {
-      font-family: var(--display);
-      font-size: 24px;
-      color: var(--dawn-soft);
-      font-weight: 500;
-      margin-bottom: 12px;
-    }
-    .map-section p {
-      color: var(--mist);
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-    .map-container {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: var(--abyss);
-    }
-    .map-container iframe {
-      width: 100%;
-      height: 350px;
-      border: 0;
-      display: block;
     }
 
   /* ===== SOCIAL DOCK — premium, glossy ===== */
@@ -370,10 +283,8 @@
     .social-dock a:hover svg { stroke: var(--dawn-soft); }
     .social-dock a:hover svg[data-fillicon] { fill: var(--dawn-soft); }
     .social-dock a:hover svg { fill: var(--dawn-soft); }
+
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 900px) {
-      .contact-grid { grid-template-columns: 1fr; gap: 30px; }
-    }
     @media (max-width: 768px) {
       .header { padding: 12px 5%; }
       .mobile-menu-btn { display: block; }
@@ -398,17 +309,14 @@
       .nav-menu.active { transform: translateX(0); }
       .main-content { padding: 100px 5% 50px; }
       .page-hero { padding: 20px 0 30px; }
-      .contact-card { padding: 18px 24px; }
-      .contact-form { padding: 24px 18px; }
-      .map-section { padding: 20px; }
-      .map-container iframe { height: 250px; }
+      .activities-grid { grid-template-columns: 1fr; }
       .social-dock { bottom: 80px; right: 16px; }
       .social-dock a { width: 40px; height: 40px; }
     }
     @media (max-width: 480px) {
       .page-hero h1 { font-size: 32px; }
-      .contact-card span { font-size: 13px; }
-      .contact-form h3 { font-size: 20px; }
+      .activity-card { padding: 20px 16px; }
+      .activity-card h3 { font-size: 19px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -448,45 +356,55 @@
 <main class="main-content">
   <!-- Hero -->
   <section class="page-hero">
-    <div class="eyebrow">Reach Out</div>
-    <h1>Get in Touch</h1>
-    <p>We’re here to help you plan your unforgettable whale watching adventure. Reach out today!</p>
-
-    <a href="mailto:wowwhales@gmail.com" class="contact-card">
-      <span>wowwhales@gmail.com</span>
-      <span>+94 777 728 439</span>
-    </a>
+    <div class="eyebrow">Explore the Blue</div>
+    <h1>Our Activities</h1>
+    <p>From whale watching to snorkeling and coastal cruises — every trip is crafted for adventure, comfort, and respect for the ocean.</p>
   </section>
 
-  <!-- Contact Grid -->
-  <div class="contact-grid">
-    <!-- Form -->
-    <section class="contact-form">
-      <h3>Send a Message</h3>
-      <form action="https://formspree.io/f/your-form-id" method="POST">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required />
+  <!-- Activities Grid -->
+  <section class="activities-grid">
+    <div class="activity-card">
+      <div class="icon">🐋</div>
+      <h3>Whale Watching</h3>
+      <p>Daily dawn departures to spot blue whales, sperm whales, and dolphins. Upper-deck seating, expert crew, all-inclusive.</p>
+      <a href="book-now.html?activity=Whale%20Watching" class="btn">Book Now</a>
+    </div>
 
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required />
+    <div class="activity-card">
+      <div class="icon">🤿</div>
+      <h3>Snorkeling</h3>
+      <p>Explore vibrant coral reefs and swim alongside tropical fish in protected areas. Guided small-group tours with all gear included.</p>
+      <a href="book-now.html?activity=Snorkeling" class="btn">Book Now</a>
+    </div>
 
-        <label for="message">Your Message</label>
-        <textarea id="message" name="message" required></textarea>
+    <div class="activity-card">
+      <div class="icon">🐠</div>
+      <h3>Scuba Diving</h3>
+      <p>Certified dive operators for beginners and experienced divers. Full equipment rental and guided dives available.</p>
+      <a href="book-now.html?activity=Scuba%20Diving" class="btn">Book Now</a>
+    </div>
 
-        <button type="submit" class="btn">Send Message</button>
-        <p class="note">We’ll respond within 24 hours during operating hours (6:00 AM – 5:00 PM).</p>
-      </form>
-    </section>
+    <div class="activity-card">
+      <div class="icon">🎣</div>
+      <h3>Deep Sea Fishing</h3>
+      <p>Half-day and full-day fishing charters with experienced crew, modern tackle, and expert fish handling.</p>
+      <a href="book-now.html?activity=Deep%20Sea%20Fishing" class="btn">Book Now</a>
+    </div>
 
-    <!-- Map -->
-    <section class="map-section">
-      <h3>Visit Us</h3>
-      <p>Find us at Mirissa Harbour for your whale watching adventure.</p>
-      <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d990.5773780534688!2d80.4498218!3d5.9491507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae177f1742ec689%3A0x1a5b4e6e89db06b4!2sMirissa%20Jet%20Liner!5e0!3m2!1sen!2slk!4v1720686023456!5m2!1sen!2slk" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mirissa Jetliner location"></iframe>
-      </div>
-    </section>
-  </div>
+    <div class="activity-card">
+      <div class="icon">⛵</div>
+      <h3>Coastal Boat Tours</h3>
+      <p>Leisurely cruises for birdwatching, sunset views, and family outings. Comfortable seating with refreshments on board.</p>
+      <a href="book-now.html?activity=Coastal%20Boat%20Tour" class="btn">Book Now</a>
+    </div>
+
+    <div class="activity-card">
+      <div class="icon">📸</div>
+      <h3>Photo Tours</h3>
+      <p>Specialized photography excursions with expert guidance to capture the perfect shot of marine life and coastal landscapes.</p>
+      <a href="book-now.html?activity=Photo%20Tour" class="btn">Book Now</a>
+    </div>
+  </section>
 </main>
 
 <!-- ===== SOCIAL DOCK (premium, same as index) ===== -->
@@ -510,7 +428,6 @@
     <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
   </a>
 </div>
-
 <!-- ===== SCRIPTS ===== -->
 <script>
   // Mobile menu
@@ -528,6 +445,23 @@
   };
   document.addEventListener('scroll', onScrollHeader, { passive: true });
   onScrollHeader();
+
+  // Fade-in for cards
+  const cards = document.querySelectorAll('.activity-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+  cards.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
 </script>
 </body>
 </html>
