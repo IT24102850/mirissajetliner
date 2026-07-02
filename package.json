@@ -1,0 +1,14 @@
+{
+  "name": "mirissajetliner",
+  "version": "1.0.0",
+  "description": "Static website for Mirissa Jetliner",
+  "scripts": {
+    "build": "echo 'No build step required for static site'",
+    "start": "serve public",
+    "optimize-images": "node tools/convert-images.js"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0",
+    "sharp": "^0.32.0"
+  }
+}

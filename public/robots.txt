@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://mirissajetliner.com/sitemap.xml
+Host: mirissajetliner.com

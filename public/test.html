@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./images/gallery/favicon.ico">
+    <title>Mirissa Jetliner - Whale Watching Tour</title>
+    <style>
+        /* [Previous CSS remains the same until the hero section] */
+
+        /* Updated Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 50vh;
+            position: relative;
+            padding: 20px 0;
+            margin-bottom: 10px;
+            text-align: center;
+            align-items: center;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1, .hero h2 {
+            font-size: clamp(28px, 6vw, 48px);
+            background: linear-gradient(to right, #00c4cc, #8a2be2);
+            margin: 5px 0;
+            -webkit-background-clip: text;
+            line-height: 1.2;
+            overflow: hidden;
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            width: fit-content;
+        }
+
+        /* [Rest of your CSS remains the same] */
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+    <div class="logo">
+        <img src="./images/gallery/favicon.ico" alt="Logo">
+        <span>Mirissa Jetliner</span>
+    </div>
+
+    <button class="mobile-menu-btn" id="menuToggle">☰</button>
+
+    <nav class="nav-menu" id="navMenu">
+        <a href="index.html#tours">Tours</a>
+        <a href="about us.html">About Us</a>
+        <a href="gallery.html">Gallery</a>
+    </nav>
+
+    <div class="buttons" id="headerButtons">
+        <div class="contact-card">
+            <span>mirissajetliner@gmail.com</span>
+            <span>+94 123 456 789</span>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="hero-buttons">
+            <a href="blog.html" class="btn blog-button">Blog</a>
+            <a href="book-now.html" class="btn book-now">Book Now</a>
+        </div>
+        <h1 id="heroTitle"></h1>
+        <h2 id="heroSubtitle"></h2>
+        <p id="heroText"></p>
+    </section>
+
+    <!-- [Rest of your HTML remains the same] -->
+</main>
+
+<!-- [Rest of your HTML and JavaScript remains the same] -->
+</body>
+</html>

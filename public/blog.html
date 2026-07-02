@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+  <meta name="description" content="Explore whales, dolphins, whale sharks, and sea turtles of Sri Lanka with Mirissa Jetliner’s blog, featuring images of blue whales, spinner dolphins, and more. Learn about these marine species and book your tour." />
+  <link rel="icon" type="image/x-icon" href="./images/gallery/favicon.ico" />
+  <link rel="canonical" href="https://mirissajetliner.com/blog.html" />
+  <meta property="og:title" content="Mirissa Jetliner - Whale Watching Blog" />
+  <meta property="og:description" content="Articles and guides on whales, dolphins and marine conservation in Sri Lanka. Plan your mirissa whale watching trip." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mirissajetliner.com/blog.html" />
+  <meta property="og:image" content="https://mirissajetliner.com/public/images/whale303.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <title>Mirissa Jetliner - Whale Watching Blog</title>
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    :root {
+      --abyss: #030d13;
+      --deep: #072330;
+      --mid: #0f3f52;
+      --surface-teal: #1b7a8c;
+      --dawn: #f3a35c;
+      --dawn-soft: #ffd9a0;
+      --foam: #f4faf8;
+      --ink: #dff3f0;
+      --mist: #8fb4bc;
+      --line: rgba(223, 243, 240, 0.12);
+      --card: rgba(244, 250, 248, 0.045);
+      --card-hover: rgba(244, 250, 248, 0.08);
+      --display: 'Fraunces', Georgia, serif;
+      --body: 'Inter', -apple-system, sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+      --shadow-glow: 0 20px 40px -12px rgba(0,0,0,0.7);
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      font-family: var(--body);
+      background: var(--abyss);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    :focus-visible {
+      outline: 2px solid var(--dawn);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 6%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: background .4s ease, border-color .4s ease, padding .3s ease, box-shadow .3s ease;
+    }
+    .header.scrolled {
+      background: rgba(3, 13, 19, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 6%;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo a { display: flex; align-items: center; gap: 10px; }
+    .logo img { width: 28px; height: 28px; border-radius: 6px; box-shadow: 0 0 12px rgba(243,163,92,0.2); }
+    .logo span {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--foam);
+      text-shadow: 0 0 20px rgba(243,163,92,0.15);
+    }
+    .nav-menu { display: flex; align-items: center; gap: 36px; }
+    .nav-menu a {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--mist);
+      position: relative;
+      padding-bottom: 4px;
+      transition: color .25s;
+    }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 1.5px;
+      background: var(--dawn);
+      transition: width .3s ease;
+    }
+    .nav-menu a:hover { color: var(--foam); }
+    .nav-menu a:hover::after { width: 100%; }
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--foam);
+      font-size: 26px;
+      cursor: pointer;
+      z-index: 1001;
+      padding: 4px 8px;
+    }
+
+    /* ===== BLOG SECTION ===== */
+    .blog-section {
+      padding: 120px 6% 80px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .blog-hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .blog-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(38px, 6vw, 60px);
+      color: var(--foam);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .blog-hero p {
+      max-width: 55ch;
+      margin: 16px auto 0;
+      color: var(--mist);
+      font-size: 17px;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin: 0 auto;
+    }
+    .blog-post {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all .3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+    }
+    .blog-post:hover {
+      transform: translateY(-5px);
+      background: var(--card-hover);
+      border-color: rgba(223, 243, 240, 0.2);
+      box-shadow: var(--shadow-glow);
+    }
+    .blog-post .image-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      margin: 12px 0 16px;
+      background: var(--deep);
+    }
+    .blog-post .image-container img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .blog-post:hover .image-container img {
+      transform: scale(1.05);
+    }
+    .blog-post h2 {
+      font-family: var(--display);
+      font-size: 22px;
+      color: var(--foam);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .blog-post p {
+      font-size: 15px;
+      color: var(--mist);
+      margin-bottom: 12px;
+      flex-grow: 1;
+    }
+    .blog-post ul {
+      font-size: 14px;
+      color: var(--mist);
+      padding-left: 4px;
+      margin-bottom: 12px;
+    }
+    .blog-post ul li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+    .blog-post ul li::before {
+      content: '＋';
+      position: absolute;
+      left: 0;
+      color: var(--dawn);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .blog-post strong { color: var(--dawn-soft); font-weight: 500; }
+    .blog-post a.btn {
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: all .3s ease;
+      display: inline-block;
+      border: 1px solid transparent;
+      text-align: center;
+      background: var(--dawn);
+      color: var(--abyss);
+      margin-top: 12px;
+      align-self: flex-start;
+    }
+    .blog-post a.btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px -8px rgba(243,163,92,0.6);
+    }
+    .blog-post a.read-more {
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--dawn-soft);
+      align-self: flex-start;
+      transition: color .25s;
+    }
+    .blog-post a.read-more:hover {
+      color: var(--dawn);
+      text-decoration: underline;
+    }
+
+    /* ===== SOCIAL DOCK — premium, glossy ===== */
+    .social-dock {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 850;
+    }
+    .social-dock a {
+      width: 44px;
+      height: 44px;
+      background: rgba(7, 35, 48, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), border-color .3s ease, background .3s ease, box-shadow .3s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .social-dock a:hover {
+      transform: translateY(-4px) scale(1.05);
+      border-color: var(--dawn);
+      background: rgba(15, 63, 82, 0.9);
+      box-shadow: 0 8px 28px rgba(243,163,92,0.25);
+    }
+    .social-dock svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--mist);
+      fill: none;
+      transition: stroke .3s ease, fill .3s ease;
+    }
+    .social-dock a[data-fill] svg { fill: var(--mist); stroke: none; }
+    .social-dock a:hover svg { stroke: var(--dawn-soft); }
+    .social-dock a:hover svg[data-fillicon] { fill: var(--dawn-soft); }
+    .social-dock a:hover svg { fill: var(--dawn-soft); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .header { padding: 12px 5%; }
+      .mobile-menu-btn { display: block; }
+      .nav-menu {
+        position: fixed;
+        top: 0; right: 0;
+        height: 100vh;
+        width: 76%;
+        max-width: 320px;
+        background: rgba(3,13,19,0.97);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 28px;
+        padding: 0 40px;
+        transform: translateX(100%);
+        transition: transform .4s cubic-bezier(.25,.46,.45,.94);
+        border-left: 1px solid var(--line);
+        box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+      }
+      .nav-menu.active { transform: translateX(0); }
+      .blog-section { padding: 100px 5% 50px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .social-dock { bottom: 80px; right: 16px; }
+      .social-dock a { width: 40px; height: 40px; }
+    }
+    @media (max-width: 480px) {
+      .blog-hero h1 { font-size: 30px; }
+      .blog-post { padding: 18px; }
+      .blog-post h2 { font-size: 19px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="siteHeader">
+  <div class="logo">
+    <a href="index.html">
+      <img src="./images/gallery/favicon.ico" alt="Mirissa Jetliner Logo">
+      <span>Mirissa Jetliner</span>
+    </a>
+  </div>
+  <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu">☰</button>
+  <nav class="nav-menu" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="about-us.html">About Us</a>
+    <a href="blog.html">Blog</a>
+    <a href="out-activities.html">Activities</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact-us.html">Contact</a>
+    <a href="research.html">Research</a>
+  </nav>
+</header>
+
+<!-- ===== BLOG SECTION ===== -->
+<section class="blog-section">
+  <div class="blog-hero">
+    <h1>From the Captain's Log</h1>
+    <p>Insights, stories, and guides from our years on the water. Learn about the majestic creatures we encounter and how we work to protect them.</p>
+  </div>
+
+  <div class="blog-grid">
+    <!-- Blue Whale -->
+    <div class="blog-post">
+      <h2>Blue Whale</h2>
+      <p>The blue whale (Balaenoptera musculus) is the largest animal on Earth, growing up to 30 meters and weighing over 200 tonnes. In Sri Lanka, they are a highlight of Mirissa (November–April) and Trincomalee (May–October) tours due to krill-rich waters.</p>
+      <ul>
+        <li><strong>Conservation Status:</strong> Endangered (IUCN Red List)</li>
+        <li><strong>Behavior:</strong> Often seen breaching or diving, with dives lasting 10–20 minutes</li>
+        <li><strong>Fun Fact:</strong> Their heart can weigh as much as a car</li>
+      </ul>
+      <div class="image-container">
+        <img src="./images/whales/animals-whale-wallpaper-preview.jpg" alt="Blue whale swimming in Sri Lankan waters near Mirissa">
+      </div>
+      <a href="#" class="read-more">Read More →</a>
+    </div>
+
+    <!-- Sperm Whale -->
+    <div class="blog-post">
+      <h2>Sperm Whale</h2>
+      <p>Sperm whales (Physeter macrocephalus) are the second most common whales in Sri Lanka, frequently spotted off Mirissa and Trincomalee. They grow up to 20 meters and are known for their deep dives (up to 3 km) to hunt squid.</p>
+      <ul>
+        <li><strong>Conservation Status:</strong> Vulnerable (IUCN Red List)</li>
+        <li><strong>Behavior:</strong> Social, often seen in pods; males are solitary</li>
+        <li><strong>Fun Fact:</strong> Their head contains spermaceti, used for echolocation</li>
+      </ul>
+      <div class="image-container">
+        <img src="./images/whales/sperm.jpg" alt="Sperm whale pod swimming off Trincomalee, Sri Lanka">
+      </div>
+      <a href="#" class="read-more">Read More →</a>
+    </div>
+
+    <!-- Spinner Dolphin -->
+    <div class="blog-post">
+      <h2>Spinner Dolphin</h2>
+      <p>Spinner dolphins (Stenella longirostris) are a highlight of Sri Lanka’s whale watching tours, especially in Mirissa and Kalpitiya (November–April). Growing up to 2.7 meters, they are known for their acrobatic spins and large pods.</p>
+      <ul>
+        <li><strong>Conservation Status:</strong> Data Deficient (IUCN Red List)</li>
+        <li><strong>Behavior:</strong> Perform spinning leaps; feed on small fish at night</li>
+        <li><strong>Fun Fact:</strong> Pods can number in the hundreds in Sri Lanka</li>
+      </ul>
+      <div class="image-container">
+        <img src="./images/whales/spinner.jpg" alt="Spinner dolphins performing acrobatic leaps in Mirissa">
+      </div>
+      <a href="#" class="read-more">Read More →</a>
+    </div>
+
+    <!-- Bryde’s Whale -->
+    <div class="blog-post">
+      <h2>Bryde’s Whale</h2>
+      <p>Bryde’s whales (Balaenoptera edeni) are slender baleen whales, reaching 15 meters. They are opportunistically sighted during Mirissa tours (November–April) while feeding on schooling fish like sardines.</p>
+      <ul>
+        <li><strong>Conservation Status:</strong> Least Concern (IUCN Red List)</li>
+        <li><strong>Behavior:</strong> Surface feeders, often lunging into fish schools</li>
+        <li><strong>Fun Fact:</strong> Pronounced “Broo-dess,” named after Johan Bryde</li>
+      </ul>
+      <div class="image-container">
+        <img src="./images/whales/brydes.jpg" alt="Bryde’s whale feeding near Sri Lanka’s southern coast">
+      </div>
+      <a href="#" class="read-more">Read More →</a>
+    </div>
+
+    <!-- Humpback Whale -->
+    <div class="blog-post">
+      <h2>Humpback Whale</h2>
+      <p>Humpback whales (Megaptera novaeangliae) are known for their acrobatic breaches and long pectoral fins, growing up to 16 meters. They are occasionally seen off Mirissa and Kalpitiya (November–April), singing complex songs during migration.</p>
+      <ul>
+        <li><strong>Conservation Status:</strong> Least Concern (IUCN Red List)</li>
+        <li><strong>Behavior:</strong> Famous for breaching and tail-slapping</li>
+        <li><strong>Fun Fact:</strong> Their songs can travel up to 10 km underwater</li>
+      </ul>
+      <div class="image-container">
+        <img src="./images/whales/humpback.png" alt="Humpback whale breaching off Mirissa, Sri Lanka">
+      </div>
+      <a href="#" class="read-more">Read More →</a>
+    </div>
+
+    <!-- Killer Whale (Orca) -->
+    <div class="blog-post">
+      <h2>Killer Whale (Orca)</h2>
+      <p>Killer whales (Orcinus orca) are rare in Sri Lankan waters but occasionally spotted off Mirissa and Trincomalee. Growing up to 9 meters, these social predators are known for their black-and-white coloration and complex hunting strategies.</p>
+      <ul>
+        <li><strong>Conservation Status:</strong> Data Deficient (IUCN Red List)</li>
+        <li><strong>Behavior:</strong> Travel in pods, hunt fish, seals, and even other whales</li>
+        <li><strong>Fun Fact:</strong> Each pod has unique vocal dialects</li>
+      </ul>
+      <div class="image-container">
+        <img src="./images/whales/orca.jpg" alt="Killer whale pod hunting in Sri Lankan waters">
+      </div>
+      <a href="#" class="read-more">Read More →</a>
+    </div>
+
+    <!-- Whale Shark -->
+    <div class="blog-post">
+      <h2>Whale Shark</h2>
+      <p>Whale sharks (Rhincodon typus) are gentle giants, growing up to 12 meters, and are the largest fish in the ocean. They are occasionally spotted off Sri Lanka’s southern coast, particularly near Mirissa and Galle (November–April).</p>
+      <ul>
+        <li><strong>Conservation Status:</strong> Endangered (IUCN Red List)</li>
+        <li><strong>Behavior:</strong> Filter feeders, swimming slowly with mouths open to consume plankton</li>
+        <li><strong>Fun Fact:</strong> Their skin is covered in unique white spots, like a fingerprint</li>
+      </ul>
+      <div class="image-container">
+        <img src="./images/whales/whaleshark.png" alt="Whale shark swimming near Mirissa, Sri Lanka">
+      </div>
+      <a href="#" class="read-more">Read More →</a>
+    </div>
+
+    <!-- Sea Turtle -->
+    <div class="blog-post">
+      <h2>Sea Turtle</h2>
+      <p>Sea turtles, including green turtles (Chelonia mydas) and hawksbill turtles (Eretmochelys imbricata), are frequently seen in Sri Lanka’s coastal waters near Mirissa and Rekawa. They grow up to 1.5 meters and are vital to marine ecosystems.</p>
+      <ul>
+        <li><strong>Conservation Status:</strong> Endangered (IUCN Red List for both species)</li>
+        <li><strong>Behavior:</strong> Nest on beaches like Rekawa; feed on seagrass, jellyfish, or sponges</li>
+        <li><strong>Fun Fact:</strong> Females return to their birth beach to lay eggs, navigating thousands of miles</li>
+      </ul>
+      <div class="image-container">
+        <img src="./images/whales/seaturtle.jpg" alt="Sea turtle swimming in coastal waters near Mirissa, Sri Lanka">
+      </div>
+      <a href="#" class="read-more">Read More →</a>
+    </div>
+
+    <!-- Responsible Whale Watching -->
+    <div class="blog-post">
+      <h2>Responsible Whale Watching</h2>
+      <p>Whale watching in Sri Lanka is thrilling, but unsustainable practices harm cetaceans. Issues include ship strikes, noise pollution, and overcrowding.</p>
+      <ul>
+        <li><strong>Ship Strikes:</strong> Large vessels in busy shipping lanes pose collision risks.</li>
+        <li><strong>Noise Pollution:</strong> Boat engines disrupt whale communication.</li>
+        <li><strong>Overcrowding:</strong> Too many boats stress whales, causing avoidance.</li>
+      </ul>
+      <p>Mirissa Jetliner is committed to conservation by:</p>
+      <ul>
+        <li>Adhering to Whale and Dolphin Conservation Society (WDCS) guidelines.</li>
+        <li>Partnering with local conservation groups to monitor cetacean populations.</li>
+        <li>Educating tourists on sustainable practices.</li>
+      </ul>
+      <a href="#" class="read-more">Our Commitment →</a>
+    </div>
+
+    <!-- Whale Watching Tips -->
+    <div class="blog-post">
+      <h2>Whale Watching Tips</h2>
+      <p>Maximize your whale watching experience in Sri Lanka with these essential tips:</p>
+      <ul>
+        <li><strong>Best Seasons:</strong> Mirissa (Nov–Apr), Trincomalee (May–Oct)</li>
+        <li><strong>What to Bring:</strong> Sunscreen, hat, binoculars, camera, seasickness meds</li>
+        <li><strong>Ethical Practices:</strong> Choose operators maintaining 100m distance</li>
+        <li><strong>Timing:</strong> Early morning tours (6–7 AM) offer calmer seas</li>
+      </ul>
+      <a href="#" class="read-more">Get Prepared →</a>
+    </div>
+
+    <!-- Book Your Adventure -->
+    <div class="blog-post">
+      <h2>Book Your Adventure</h2>
+      <p>Ready to witness these magnificent creatures in their natural habitat? Our tours fill up fast, especially during peak season. Secure your spot today for an unforgettable journey.</p>
+      <a href="book-now.html" class="btn">See Prices &amp; Book</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOCIAL DOCK (premium, same as index) ===== -->
+<div class="social-dock">
+  <a href="https://wa.me/94777728439" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </a>
+  <a href="https://www.facebook.com/share/1G4xsrWQTt/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+  </a>
+  <a href="https://www.tiktok.com/@mirissajetliner" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+  </a>
+  <a href="https://www.instagram.com/nihalwalewatching?igsh=MTlsZzdvcTNiMnZ2cg==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="19.5" cy="4.5" r="1.5"/></svg>
+  </a>
+  <a href="https://www.tripadvisor.com/Profile/jetlinermirissa" target="_blank" rel="noopener noreferrer" aria-label="Tripadvisor" title="Tripadvisor">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+  </a>
+  <a href="https://www.youtube.com/channel/UCr-fLwz-vOUq23pK5VtVWiA" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+  </a>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+    navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('active')));
+  }
+
+  // Header scroll effect
+  const header = document.getElementById('siteHeader');
+  const onScrollHeader = () => {
+    if (header) header.classList.toggle('scrolled', window.scrollY > 40);
+  };
+  document.addEventListener('scroll', onScrollHeader, { passive: true });
+  onScrollHeader();
+</script>
+</body>
+</html>

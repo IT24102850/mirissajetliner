@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <meta name="description" content="Premium whale & dolphin watching voyages from Mirissa Harbour. Upper-deck-only boat, certified crew, all-inclusive.">
+  <link rel="icon" type="image/x-icon" href="./images/gallery/favicon.ico">
+  <meta name="theme-color" content="#030d13">
+  <meta property="og:title" content="Mirissa Jetliner — Whale Watching, Mirissa Harbour">
+  <meta property="og:description" content="Daily premium whale & dolphin watching from Mirissa Harbour. Upper-deck-only boat, certified crew, all-inclusive.">
+  <meta property="og:image" content="./images/whale303.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <title>Mirissa Jetliner — Premium Whale Watching</title>
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    :root {
+      --abyss: #030d13;
+      --deep: #072330;
+      --mid: #0f3f52;
+      --surface-teal: #1b7a8c;
+      --dawn: #f3a35c;
+      --dawn-soft: #ffd9a0;
+      --foam: #f4faf8;
+      --ink: #dff3f0;
+      --mist: #8fb4bc;
+      --line: rgba(223, 243, 240, 0.12);
+      --card: rgba(244, 250, 248, 0.045);
+      --card-hover: rgba(244, 250, 248, 0.08);
+      --display: 'Fraunces', Georgia, serif;
+      --body: 'Inter', -apple-system, sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+      --shadow-glow: 0 20px 40px -12px rgba(0,0,0,0.7);
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      font-family: var(--body);
+      background: var(--abyss);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    :focus-visible {
+      outline: 2px solid var(--dawn);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 6%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: background .4s ease, border-color .4s ease, padding .3s ease, box-shadow .3s ease;
+    }
+    .header.scrolled {
+      background: rgba(3, 13, 19, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 6%;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo a { display: flex; align-items: center; gap: 10px; }
+    .logo img { width: 28px; height: 28px; border-radius: 6px; box-shadow: 0 0 12px rgba(243,163,92,0.2); }
+    .logo span {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--foam);
+      text-shadow: 0 0 20px rgba(243,163,92,0.15);
+    }
+    .nav-menu { display: flex; align-items: center; gap: 36px; }
+    .nav-menu a {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--mist);
+      position: relative;
+      padding-bottom: 4px;
+      transition: color .25s;
+    }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 1.5px;
+      background: var(--dawn);
+      transition: width .3s ease;
+    }
+    .nav-menu a:hover { color: var(--foam); }
+    .nav-menu a:hover::after { width: 100%; }
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--foam);
+      font-size: 26px;
+      cursor: pointer;
+      z-index: 1001;
+      padding: 4px 8px;
+    }
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 13, 19, 0.6);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease;
+      z-index: 999;
+    }
+    .nav-overlay.active { opacity: 1; pointer-events: auto; }
+
+    /* ===== DEPTH RAIL ===== */
+    .depth-rail {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 900;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 340px;
+    }
+    .depth-rail__track {
+      position: relative;
+      width: 2px;
+      height: 100%;
+      background: var(--line);
+      border-radius: 2px;
+    }
+    .depth-rail__fill {
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px;
+      height: 0%;
+      background: linear-gradient(180deg, var(--dawn), var(--surface-teal));
+      transition: height .15s linear;
+      border-radius: 2px;
+      box-shadow: 0 0 12px rgba(243,163,92,0.3);
+    }
+    .depth-mark {
+      position: absolute;
+      left: 0;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    .depth-mark__dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--mid);
+      border: 1.5px solid var(--mist);
+      transition: all .3s ease;
+      flex-shrink: 0;
+    }
+    .depth-mark.active .depth-mark__dot {
+      background: var(--dawn);
+      border-color: var(--dawn);
+      box-shadow: 0 0 16px rgba(243, 163, 92, 0.7);
+      transform: scale(1.15);
+    }
+    .depth-mark__label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--mist);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity .3s ease, transform .3s ease, color .3s ease;
+    }
+    .depth-mark.active .depth-mark__label {
+      opacity: 1;
+      transform: translateX(0);
+      color: var(--dawn-soft);
+    }
+    .mobile-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--surface-teal), var(--dawn));
+      z-index: 1200;
+      transition: width .1s linear;
+      box-shadow: 0 0 12px rgba(243,163,92,0.4);
+    }
+    @media (min-width: 981px) { .mobile-progress { display: none; } }
+    @media (max-width: 980px) { .depth-rail { display: none; } }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 6% 100px;
+      background:
+        radial-gradient(ellipse 900px 500px at 50% 8%, rgba(243, 163, 92, 0.18), transparent 60%),
+        linear-gradient(180deg, rgba(3,13,19,.3) 0%, rgba(5,20,28,.7) 45%, var(--abyss) 100%),
+        url('images/whale303.jpg') center 30%/cover no-repeat;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero__whale {
+      position: absolute;
+      right: -40px;
+      top: 12%;
+      width: 400px;
+      opacity: 0.10;
+      pointer-events: none;
+      animation: drift 20s infinite alternate ease-in-out;
+    }
+    @keyframes drift { 0% { transform: translateX(0) rotate(-2deg); } 100% { transform: translateX(-20px) rotate(2deg); } }
+    .hero__eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dawn-soft);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      animation: riseIn .8s ease forwards .1s;
+    }
+    .hero__eyebrow::before {
+      content: '';
+      width: 32px; height: 1.5px;
+      background: var(--dawn);
+      box-shadow: 0 0 10px rgba(243,163,92,0.5);
+    }
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(40px, 6.8vw, 80px);
+      line-height: 1.05;
+      max-width: 14ch;
+      color: var(--foam);
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 40px rgba(0,0,0,0.5);
+      opacity: 0;
+      animation: riseIn .9s ease forwards .25s;
+    }
+    .hero__sub {
+      margin-top: 24px;
+      max-width: 48ch;
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--mist);
+      font-weight: 400;
+      opacity: 0;
+      animation: riseIn .9s ease forwards .45s;
+    }
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 44px;
+      opacity: 0;
+      animation: riseIn .9s ease forwards .65s;
+    }
+    .btn {
+      padding: 16px 34px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: all .3s cubic-bezier(.25,.46,.45,.94);
+      display: inline-block;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .btn--ghost {
+      color: var(--foam);
+      border-color: rgba(223,243,240,0.3);
+      background: transparent;
+      backdrop-filter: blur(4px);
+    }
+    .btn--ghost:hover {
+      border-color: var(--dawn);
+      color: var(--dawn-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(243,163,92,0.2);
+    }
+    .btn--solid {
+      background: var(--dawn);
+      color: var(--abyss);
+      box-shadow: 0 0 0 0 rgba(243,163,92,0.4);
+    }
+    .btn--solid:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 36px -8px rgba(243,163,92,0.6);
+    }
+    .hero__contact {
+      margin-top: 56px;
+      display: inline-flex;
+      gap: 28px;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--mist);
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      opacity: 0;
+      animation: riseIn .9s ease forwards .8s;
+    }
+    .hero__contact:hover { color: var(--dawn-soft); }
+    .hero__contact span { display: flex; align-items: center; gap: 8px; }
+    .scroll-cue {
+      position: absolute;
+      bottom: 36px;
+      left: 6%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--mist);
+      text-transform: uppercase;
+    }
+    .scroll-cue__line {
+      width: 1.5px; height: 34px;
+      background: linear-gradient(180deg, var(--mist), transparent);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: .3; } 50% { opacity: 1; } }
+
+    /* ===== SECTIONS ===== */
+    section.block {
+      padding: 120px 6%;
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--surface-teal);
+      margin-bottom: 14px;
+    }
+    .block__title {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(30px, 4.2vw, 48px);
+      color: var(--foam);
+      max-width: 16ch;
+      line-height: 1.1;
+    }
+    .block__intro {
+      margin-top: 18px;
+      max-width: 60ch;
+      color: var(--mist);
+      font-size: 16px;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      transition: opacity .8s cubic-bezier(.25,.46,.45,.94), transform .8s cubic-bezier(.25,.46,.45,.94);
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0) scale(1); }
+
+    /* ===== TIMELINE ===== */
+    .timeline { margin-top: 64px; display: flex; flex-direction: column; }
+    .timeline__row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 28px;
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      align-items: baseline;
+    }
+    .timeline__row:last-child { border-bottom: 1px solid var(--line); }
+    .timeline__time {
+      font-family: var(--mono);
+      font-size: 16px;
+      color: var(--dawn-soft);
+      letter-spacing: 0.02em;
+      font-weight: 500;
+    }
+    .timeline__label { font-size: 18px; color: var(--foam); font-weight: 500; margin-bottom: 4px; }
+    .timeline__desc { color: var(--mist); font-size: 15px; max-width: 54ch; }
+    .callout {
+      margin-top: 40px;
+      display: inline-flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px 24px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      font-size: 14px;
+      color: var(--mist);
+      backdrop-filter: blur(4px);
+    }
+    .callout b { color: var(--dawn-soft); font-weight: 600; }
+
+    /* ===== VESSEL ===== */
+    .vessel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 64px;
+      align-items: start;
+    }
+    .vessel__copy p { color: var(--mist); font-size: 15px; margin-bottom: 18px; max-width: 46ch; }
+    .vessel__copy p:last-child { margin-bottom: 0; }
+    .readout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-glow);
+    }
+    .readout__cell {
+      background: var(--deep);
+      padding: 28px 24px;
+      transition: background .3s ease;
+    }
+    .readout__cell:hover { background: var(--mid); }
+    .readout__value {
+      font-family: var(--mono);
+      font-size: clamp(26px, 3.2vw, 36px);
+      color: var(--dawn-soft);
+      letter-spacing: -0.02em;
+    }
+    .readout__unit { font-size: 14px; color: var(--surface-teal); margin-left: 4px; }
+    .readout__label { margin-top: 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mist); }
+
+    /* ===== CREW ===== */
+    .crew-grid {
+      margin-top: 64px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-glow);
+    }
+    .crew-card {
+      background: var(--deep);
+      padding: 32px 28px;
+      transition: background .4s ease, transform .3s ease;
+    }
+    .crew-card:hover { background: var(--mid); transform: translateY(-2px); }
+    .crew-card__badge {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      border: 1.5px solid var(--surface-teal);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--dawn-soft);
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(27,122,140,0.2);
+    }
+    .crew-card__role { font-size: 17px; font-weight: 600; color: var(--foam); margin-bottom: 4px; }
+    .crew-card__cert { font-family: var(--mono); font-size: 11px; color: var(--surface-teal); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
+    .crew-card__desc { font-size: 14px; color: var(--mist); }
+    .registered-strip {
+      margin-top: 40px;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--mist);
+    }
+    .registered-strip span { color: var(--dawn-soft); }
+
+    /* ===== ABOARD ===== */
+    .aboard-list {
+      margin-top: 64px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px 40px;
+    }
+    .aboard-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding .3s ease;
+    }
+    .aboard-item:hover { padding-left: 8px; }
+    .aboard-item__mark {
+      font-family: var(--mono);
+      color: var(--dawn);
+      font-size: 18px;
+      line-height: 1.4;
+    }
+    .aboard-item__text { color: var(--ink); font-size: 15px; }
+
+    /* ===== CTA BAND ===== */
+    .cta-band {
+      margin: 40px 6% 0;
+      padding: 90px 8%;
+      border-radius: 28px;
+      background:
+        radial-gradient(ellipse 700px 300px at 20% 0%, rgba(243,163,92,0.2), transparent 65%),
+        linear-gradient(160deg, var(--mid), var(--deep));
+      border: 1px solid var(--line);
+      text-align: center;
+      box-shadow: var(--shadow-glow);
+    }
+    .cta-band h2 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(30px, 4.6vw, 50px);
+      color: var(--foam);
+    }
+    .cta-band p { margin: 18px auto 0; max-width: 48ch; color: var(--mist); }
+    .cta-band .hero__actions { justify-content: center; margin-top: 40px; animation: none; opacity: 1; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      margin-top: 100px;
+      padding: 70px 6% 40px;
+      border-top: 1px solid var(--line);
+      background: radial-gradient(ellipse at 50% 0%, rgba(15,63,82,0.2), transparent 70%);
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-section h2 {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--surface-teal);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .footer-section ul li { margin-bottom: 10px; }
+    .footer-section ul li a {
+      color: var(--mist);
+      font-size: 14px;
+      transition: color .25s, padding-left .25s;
+    }
+    .footer-section ul li a:hover { color: var(--dawn-soft); padding-left: 6px; }
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 50px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-size: 12.5px;
+      color: var(--mist);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ===== SOCIAL DOCK — premium, glossy ===== */
+    .social-dock {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 850;
+    }
+    .social-dock a {
+      width: 44px;
+      height: 44px;
+      background: rgba(7, 35, 48, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), border-color .3s ease, background .3s ease, box-shadow .3s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .social-dock a:hover {
+      transform: translateY(-4px) scale(1.05);
+      border-color: var(--dawn);
+      background: rgba(15, 63, 82, 0.9);
+      box-shadow: 0 8px 28px rgba(243,163,92,0.25);
+    }
+    .social-dock svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--mist);
+      fill: none;
+      transition: stroke .3s ease, fill .3s ease;
+    }
+    .social-dock a[data-fill] svg { fill: var(--mist); stroke: none; }
+    .social-dock a:hover svg { stroke: var(--dawn-soft); }
+    .social-dock a:hover svg[data-fillicon] { fill: var(--dawn-soft); }
+
+    /* follow row (footer) */
+    .follow-row { display: flex; gap: 12px; margin-top: 6px; }
+    .follow-row a {
+      width: 38px; height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .3s ease, transform .25s ease, background .3s ease;
+      background: rgba(7,35,48,0.3);
+    }
+    .follow-row a:hover { border-color: var(--dawn); transform: translateY(-3px); background: rgba(15,63,82,0.4); }
+    .follow-row svg { width: 16px; height: 16px; stroke: var(--mist); fill: none; transition: stroke .3s ease, fill .3s ease; }
+    .follow-row a[data-fill] svg { fill: var(--mist); stroke: none; }
+    .follow-row a:hover svg { stroke: var(--dawn-soft); }
+    .follow-row a:hover svg[data-fillicon] { fill: var(--dawn-soft); }
+
+    /* ===== MOBILE STICKY BAR ===== */
+    .mobile-cta-bar {
+      display: none;
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 1100;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(3, 13, 19, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--line);
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      transform: translateY(0);
+      transition: transform .35s ease;
+    }
+    .mobile-cta-bar.hide { transform: translateY(100%); }
+    .mobile-cta-bar__info { display: flex; flex-direction: column; line-height: 1.2; }
+    .mobile-cta-bar__label { font-family: var(--display); font-size: 15px; color: var(--foam); font-weight: 500; }
+    .mobile-cta-bar__sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; color: var(--surface-teal); text-transform: uppercase; }
+    .mobile-cta-bar .btn { padding: 12px 24px; font-size: 12px; white-space: nowrap; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .vessel { grid-template-columns: 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      .header { padding: 12px 5%; }
+      .mobile-menu-btn { display: block; }
+      .nav-menu {
+        position: fixed;
+        top: 0; right: 0;
+        height: 100vh;
+        width: 76%;
+        max-width: 320px;
+        background: rgba(3,13,19,0.97);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 28px;
+        padding: 0 40px;
+        transform: translateX(100%);
+        transition: transform .4s cubic-bezier(.25,.46,.45,.94);
+        border-left: 1px solid var(--line);
+        box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+      }
+      .nav-menu.active { transform: translateX(0); }
+      section.block { padding: 80px 5%; }
+      .hero { padding: 120px 5% 70px; }
+      .hero__whale { display: none; }
+      .hero__contact { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .timeline__row { grid-template-columns: 1fr; gap: 6px; }
+      .readout { grid-template-columns: 1fr 1fr; }
+      .cta-band { padding: 60px 6%; margin: 24px 0 0; border-radius: 20px; }
+      .social-dock { bottom: 80px; right: 16px; }
+      .social-dock a { width: 40px; height: 40px; }
+      .mobile-cta-bar { display: flex; }
+      .footer-content { flex-direction: column; gap: 30px; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 32px; }
+      .btn { padding: 14px 24px; font-size: 12px; }
+      .readout__cell { padding: 20px 16px; }
+      .crew-card { padding: 24px 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="mobile-progress" id="mobileProgress"></div>
+
+<header class="header" id="siteHeader">
+  <div class="logo">
+    <a href="index.html">
+      <img src="./images/gallery/favicon.ico" alt="Mirissa Jetliner">
+      <span>Mirissa Jetliner</span>
+    </a>
+  </div>
+  <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu">☰</button>
+  <nav class="nav-menu" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="about-us.html">About Us</a>
+    <a href="out-activities.html">Activities</a>
+    <a href="blog.html">Blog</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact-us.html">Contact</a>
+    <a href="research.html">Research</a>
+  </nav>
+</header>
+
+<!-- Depth rail -->
+<nav class="depth-rail" aria-hidden="true">
+  <div class="depth-rail__track">
+    <div class="depth-rail__fill" id="railFill"></div>
+    <div class="depth-rail__marks" id="railMarks">
+      <div class="depth-mark" data-target="hero" style="top:0%">
+        <div class="depth-mark__dot"></div>
+        <div class="depth-mark__label">SURFACE</div>
+      </div>
+      <div class="depth-mark" data-target="crossing" style="top:20%">
+        <div class="depth-mark__dot"></div>
+        <div class="depth-mark__label">THE CROSSING</div>
+      </div>
+      <div class="depth-mark" data-target="vessel" style="top:45%">
+        <div class="depth-mark__dot"></div>
+        <div class="depth-mark__label">THE VESSEL</div>
+      </div>
+      <div class="depth-mark" data-target="crew" style="top:70%">
+        <div class="depth-mark__dot"></div>
+        <div class="depth-mark__label">THE CREW</div>
+      </div>
+      <div class="depth-mark" data-target="aboard" style="top:95%">
+        <div class="depth-mark__dot"></div>
+        <div class="depth-mark__label">ABOARD</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <svg class="hero__whale" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40,180 C90,120 160,90 220,95 C210,60 240,20 300,10 C270,50 265,85 285,110 C330,105 370,130 390,170 C340,155 300,160 270,180 C240,230 170,260 110,245 C150,220 175,195 175,170 C130,175 70,190 40,180 Z"
+            fill="none" stroke="#f3a35c" stroke-width="1.8" opacity="0.6"/>
+    </svg>
+    <p class="hero__eyebrow">Mirissa Harbour · Daily at Dawn</p>
+    <h1>Where the Ocean Shows You Its Giants</h1>
+    <p class="hero__sub">Blue whales and spinner dolphins, a few miles off Sri Lanka's south coast — watched from the upper deck of a boat built for exactly this and nothing else.</p>
+    <div class="hero__actions">
+      <a href="book-now.html" class="btn btn--solid">Check Prices &amp; Book</a>
+      <a href="blog.html" class="btn btn--ghost">Read the Voyage Log</a>
+    </div>
+    <a href="#contact" class="hero__contact">
+      <span>✉ wowwhales@gmail.com</span>
+      <span>☎ +94 777 728 439</span>
+    </a>
+    <div class="scroll-cue"><div class="scroll-cue__line"></div> Scroll to descend</div>
+  </section>
+
+  <!-- THE CROSSING -->
+  <section class="block reveal" id="crossing">
+    <p class="eyebrow">Departure to Return</p>
+    <h2 class="block__title">The Crossing</h2>
+    <p class="block__intro">Every seat is booked ahead, every morning starts the same way, and nothing about the schedule is left to chance.</p>
+    <div class="timeline">
+      <div class="timeline__row">
+        <div class="timeline__time">05:45</div>
+        <div><div class="timeline__label">Pickup</div><div class="timeline__desc">Free transport to the harbour for anyone within 3km — arranged when you book.</div></div>
+      </div>
+      <div class="timeline__row">
+        <div class="timeline__time">06:00</div>
+        <div><div class="timeline__label">Boarding</div><div class="timeline__desc">Arrive at Mirissa Harbour, life jackets fitted, briefing on the upper deck.</div></div>
+      </div>
+      <div class="timeline__row">
+        <div class="timeline__time">06:30</div>
+        <div><div class="timeline__label">Cast Off</div><div class="timeline__desc">Daily departure, rain or shine — this is when the crew starts watching the water.</div></div>
+      </div>
+      <div class="timeline__row">
+        <div class="timeline__time">3–5 HRS</div>
+        <div><div class="timeline__label">Search &amp; Sighting</div><div class="timeline__desc">Our zoologist and coxswains track the pod. Duration depends on conditions and how far the whales are running that day.</div></div>
+      </div>
+      <div class="timeline__row">
+        <div class="timeline__time">RETURN</div>
+        <div><div class="timeline__label">Back to Harbour</div><div class="timeline__desc">Free transport home, same route as the morning pickup.</div></div>
+      </div>
+    </div>
+    <div class="callout">
+      <span><b>120 passengers maximum</b> per sailing. Pre-booking is required — we follow international whale-watching guidelines on approach distance and boat speed around pods.</span>
+    </div>
+  </section>
+
+  <!-- VESSEL -->
+  <section class="block reveal" id="vessel">
+    <p class="eyebrow">Built For One Job</p>
+    <h2 class="block__title">The Vessel</h2>
+    <div class="vessel">
+      <div class="vessel__copy">
+        <p>Most boats on this coast were built for fishing or ferrying and repurposed for tourists. Ours wasn't. Every seat is on the upper deck, positioned for sightlines, not shade.</p>
+        <p>Twin engines keep the ride steady rather than fast — no vibration underfoot, no listing when the boat turns to follow a pod. It's the difference between a rough morning and one you'd do again tomorrow.</p>
+        <p>Every passenger is covered by full life insurance for the duration of the trip, on top of an onboard life jacket for every seat.</p>
+      </div>
+      <div class="readout">
+        <div class="readout__cell"><div class="readout__value">1700<span class="readout__unit">HP</span></div><div class="readout__label">Twin Engine Output</div></div>
+        <div class="readout__cell"><div class="readout__value">15<span class="readout__unit">KN</span></div><div class="readout__label">Cruising Speed</div></div>
+        <div class="readout__cell"><div class="readout__value">2</div><div class="readout__label">Engines, Independent</div></div>
+        <div class="readout__cell"><div class="readout__value">Upper</div><div class="readout__label">Deck Seating Only</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREW -->
+  <section class="block reveal" id="crew">
+    <p class="eyebrow">Ten+ Years At Sea</p>
+    <h2 class="block__title">The Crew</h2>
+    <p class="block__intro">Six people, four certifications, one boat. Nobody aboard is filling in for the day.</p>
+    <div class="crew-grid">
+      <div class="crew-card"><div class="crew-card__badge">CX</div><div class="crew-card__role">Coxswains (x2)</div><div class="crew-card__cert">Sri Lanka Tourist Board</div><div class="crew-card__desc">Handle the boat and the approach — reading the water, the pod, and the other traffic around it.</div></div>
+      <div class="crew-card"><div class="crew-card__badge">LG</div><div class="crew-card__role">Life Guards (x2)</div><div class="crew-card__cert">Wildlife Department</div><div class="crew-card__desc">Watch the passengers the way the coxswains watch the water.</div></div>
+      <div class="crew-card"><div class="crew-card__badge">ME</div><div class="crew-card__role">Marine Engineer</div><div class="crew-card__cert">Coastguard Certified</div><div class="crew-card__desc">Keeps both engines and the hull in the condition they need to be in before anyone boards.</div></div>
+      <div class="crew-card"><div class="crew-card__badge">ZO</div><div class="crew-card__role">Zoologist</div><div class="crew-card__cert">Harbour Cooperation</div><div class="crew-card__desc">Identifies species, reads behaviour, and calls the approach that keeps the animals undisturbed.</div></div>
+    </div>
+    <div class="registered-strip">
+      <div>Insured by <span>Sri Lanka Insurance</span></div>
+      <div>Member of <span>Sri Lanka Boat Operator Society</span></div>
+    </div>
+  </section>
+
+  <!-- ABOARD -->
+  <section class="block reveal" id="aboard">
+    <p class="eyebrow">Everything's Included</p>
+    <h2 class="block__title">Aboard, At No Extra Cost</h2>
+    <p class="block__intro">No add-ons, no surprise charges once you're on the water.</p>
+    <div class="aboard-list">
+      <div class="aboard-item"><span class="aboard-item__mark">＋</span><span class="aboard-item__text">Tea or coffee</span></div>
+      <div class="aboard-item"><span class="aboard-item__mark">＋</span><span class="aboard-item__text">Breakfast, fruit, water &amp; juice</span></div>
+      <div class="aboard-item"><span class="aboard-item__mark">＋</span><span class="aboard-item__text">Seasick tablets &amp; first aid</span></div>
+      <div class="aboard-item"><span class="aboard-item__mark">＋</span><span class="aboard-item__text">Free Wi-Fi &amp; music</span></div>
+      <div class="aboard-item"><span class="aboard-item__mark">＋</span><span class="aboard-item__text">Life jacket for every seat</span></div>
+      <div class="aboard-item"><span class="aboard-item__mark">＋</span><span class="aboard-item__text">Full passenger life insurance</span></div>
+      <div class="aboard-item"><span class="aboard-item__mark">＋</span><span class="aboard-item__text">Return transport, within 3km</span></div>
+      <div class="aboard-item"><span class="aboard-item__mark">＋</span><span class="aboard-item__text">Onboard toilet facilities</span></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="block reveal" id="contact" style="padding-top:0;">
+    <div class="cta-band">
+      <h2>Ready to Meet Them?</h2>
+      <p>Seats are capped at 120 and this route fills up fast in season. Reserve before you land.</p>
+      <div class="hero__actions">
+        <a href="book-now.html" class="btn btn--solid">Reserve a Seat</a>
+        <a href="contact-us.html" class="btn btn--ghost">Ask a Question</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h2>Navigate</h2>
+      <ul><li><a href="index.html">Home</a></li><li><a href="about-us.html">About Us</a></li><li><a href="out-activities.html">Activities</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="research.html">Research</a></li></ul>
+    </div>
+    <div class="footer-section">
+      <h2>Book</h2>
+      <ul><li><a href="book-now.html">Prices &amp; Booking</a></li><li><a href="contact-us.html">Contact Us</a></li><li><a href="blog.html">Voyage Log</a></li></ul>
+    </div>
+    <div class="footer-section">
+      <h2>Reach Us</h2>
+      <ul><li><a href="mailto:wowwhales@gmail.com">wowwhales@gmail.com</a></li><li><a href="tel:+94777728439">+94 777 728 439</a></li><li><a href="#hero">Mirissa Harbour, Sri Lanka</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Mirissa Jetliner. All rights reserved.</span>
+    <span>Departs daily, 06:30, Mirissa Harbour.</span>
+  </div>
+</footer>
+
+<!-- Premium Social Dock -->
+<div class="social-dock">
+  <a href="https://wa.me/94777728439" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </a>
+  <a href="https://www.facebook.com/share/1G4xsrWQTt/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+  </a>
+  <a href="https://www.tiktok.com/@mirissajetliner" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+  </a>
+  <a href="https://www.instagram.com/nihalwalewatching?igsh=MTlsZzdvcTNiMnZ2cg==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="19.5" cy="4.5" r="1.5"/></svg>
+  </a>
+  <a href="https://www.tripadvisor.com/Profile/jetlinermirissa" target="_blank" rel="noopener noreferrer" aria-label="Tripadvisor" title="Tripadvisor">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+  </a>
+  <a href="https://www.youtube.com/channel/UCr-fLwz-vOUq23pK5VtVWiA" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+  </a>
+</div>
+
+<!-- Mobile CTA Bar -->
+<div class="mobile-cta-bar" id="mobileCta">
+  <div class="mobile-cta-bar__info">
+    <span class="mobile-cta-bar__label">Mirissa Jetliner</span>
+    <span class="mobile-cta-bar__sub">Daily departures · 120 seats</span>
+  </div>
+  <a href="book-now.html" class="btn btn--solid">Book Now</a>
+</div>
+
+<script>
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+  navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('active')));
+
+  // Header scroll
+  const header = document.getElementById('siteHeader');
+  const onScrollHeader = () => header.classList.toggle('scrolled', window.scrollY > 40);
+  document.addEventListener('scroll', onScrollHeader, { passive: true });
+  onScrollHeader();
+
+  // Reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); revealObserver.unobserve(entry.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // Depth rail
+  const railFill = document.getElementById('railFill');
+  const marks = document.querySelectorAll('.depth-mark');
+  const mobileProgress = document.getElementById('mobileProgress');
+  const sectionEls = Array.from(marks).map(m => document.getElementById(m.dataset.target)).filter(Boolean);
+  let ticking = false;
+  function updateRail() {
+    const scrollTop = window.scrollY;
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = scrollable > 0 ? Math.min(100, Math.max(0, (scrollTop / scrollable) * 100)) : 0;
+    if (railFill) railFill.style.height = pct + '%';
+    if (mobileProgress) mobileProgress.style.width = pct + '%';
+    let activeIndex = 0;
+    sectionEls.forEach((sec, i) => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.5) activeIndex = i;
+    });
+    marks.forEach((m, i) => m.classList.toggle('active', i === activeIndex));
+    ticking = false;
+  }
+  document.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateRail); ticking = true; } }, { passive: true });
+  updateRail();
+
+  // Depth rail click scroll
+  marks.forEach(m => {
+    m.style.cursor = 'pointer';
+    m.addEventListener('click', () => {
+      const target = document.getElementById(m.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Mobile CTA hide/show on scroll
+  const mobileCta = document.getElementById('mobileCta');
+  let lastScroll = 0;
+  document.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > lastScroll && currentScroll > 200) mobileCta.classList.add('hide');
+    else mobileCta.classList.remove('hide');
+    lastScroll = currentScroll;
+  }, { passive: true });
+</script>
+</body>
+</html>

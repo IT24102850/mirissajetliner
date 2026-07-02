@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+  <link rel="icon" type="image/x-icon" href="./images/gallery/favicon.ico" />
+  <title>Book Now - Mirissa Jetliner Whale Watching</title>
+  <meta name="description" content="Book your premium whale watching tour with Mirissa Jetliner. Secure your spot for an unforgettable adventure in Mirissa, Sri Lanka." />
+  <link rel="canonical" href="https://mirissajetliner.com/book-now.html" />
+  <meta property="og:title" content="Book Now - Mirissa Jetliner" />
+  <meta property="og:description" content="Secure your whale watching tour with Mirissa Jetliner. Premium tours, certified crew, all-inclusive." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mirissajetliner.com/book-now.html" />
+  <meta property="og:image" content="https://mirissajetliner.com/public/images/whale303.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & VARIABLES (mirror index) ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    :root {
+      --abyss: #030d13;
+      --deep: #072330;
+      --mid: #0f3f52;
+      --surface-teal: #1b7a8c;
+      --dawn: #f3a35c;
+      --dawn-soft: #ffd9a0;
+      --foam: #f4faf8;
+      --ink: #dff3f0;
+      --mist: #8fb4bc;
+      --line: rgba(223, 243, 240, 0.12);
+      --card: rgba(244, 250, 248, 0.045);
+      --card-hover: rgba(244, 250, 248, 0.08);
+      --display: 'Fraunces', Georgia, serif;
+      --body: 'Inter', -apple-system, sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+      --shadow-glow: 0 20px 40px -12px rgba(0,0,0,0.7);
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      font-family: var(--body);
+      background: var(--abyss);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: url('images/whale303.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      background-attachment: fixed;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    :focus-visible {
+      outline: 2px solid var(--dawn);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ===== OVERLAY ===== */
+    .body-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(3,13,19,.6) 0%, rgba(5,20,28,.85) 45%, var(--abyss) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 6%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: background .4s ease, border-color .4s ease, padding .3s ease, box-shadow .3s ease;
+    }
+    .header.scrolled {
+      background: rgba(3, 13, 19, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 6%;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo a { display: flex; align-items: center; gap: 10px; }
+    .logo img { width: 28px; height: 28px; border-radius: 6px; box-shadow: 0 0 12px rgba(243,163,92,0.2); }
+    .logo span {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--foam);
+      text-shadow: 0 0 20px rgba(243,163,92,0.15);
+    }
+    .nav-menu { display: flex; align-items: center; gap: 36px; }
+    .nav-menu a {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--mist);
+      position: relative;
+      padding-bottom: 4px;
+      transition: color .25s;
+    }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 1.5px;
+      background: var(--dawn);
+      transition: width .3s ease;
+    }
+    .nav-menu a:hover { color: var(--foam); }
+    .nav-menu a:hover::after { width: 100%; }
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--foam);
+      font-size: 26px;
+      cursor: pointer;
+      z-index: 1001;
+      padding: 4px 8px;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      position: relative;
+      z-index: 1;
+      padding: 120px 6% 80px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* Hero */
+    .page-hero {
+      text-align: center;
+      padding: 40px 0 30px;
+    }
+    .page-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 500;
+      color: var(--foam);
+      letter-spacing: -0.01em;
+      text-shadow: 0 4px 40px rgba(0,0,0,0.5);
+    }
+    .page-hero p {
+      max-width: 55ch;
+      margin: 18px auto 0;
+      color: var(--mist);
+      font-size: 17px;
+    }
+    .page-hero .eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--dawn-soft);
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .page-hero .eyebrow::before {
+      content: '';
+      width: 32px; height: 1.5px;
+      background: var(--dawn);
+      box-shadow: 0 0 10px rgba(243,163,92,0.5);
+    }
+    .page-hero .eyebrow::after {
+      content: '';
+      width: 32px; height: 1.5px;
+      background: var(--dawn);
+      box-shadow: 0 0 10px rgba(243,163,92,0.5);
+    }
+
+    /* Pricing Cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin: 30px 0 40px;
+    }
+    .pricing-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      backdrop-filter: blur(4px);
+      box-shadow: var(--shadow-glow);
+      transition: all .3s ease;
+    }
+    .pricing-card:hover {
+      transform: translateY(-5px);
+      background: var(--card-hover);
+      border-color: rgba(223, 243, 240, 0.2);
+    }
+    .pricing-card h3 {
+      font-family: var(--display);
+      font-size: 24px;
+      color: var(--dawn-soft);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .pricing-card .price {
+      font-family: var(--mono);
+      font-size: 32px;
+      color: var(--dawn);
+      margin: 12px 0;
+    }
+    .pricing-card .price small {
+      font-size: 16px;
+      color: var(--mist);
+    }
+    .pricing-card ul {
+      text-align: left;
+      margin: 16px 0;
+    }
+    .pricing-card ul li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 6px;
+      color: var(--mist);
+      font-size: 14px;
+    }
+    .pricing-card ul li::before {
+      content: '＋';
+      position: absolute;
+      left: 0;
+      color: var(--dawn);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .pricing-card .btn {
+      padding: 12px 32px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: all .3s ease;
+      display: inline-block;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: var(--dawn);
+      color: var(--abyss);
+      margin-top: 8px;
+    }
+    .pricing-card .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px -8px rgba(243,163,92,0.6);
+    }
+
+    /* Booking Form */
+    .booking-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 20px;
+      align-items: start;
+    }
+    .booking-form {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px 28px;
+      backdrop-filter: blur(4px);
+      box-shadow: var(--shadow-glow);
+    }
+    .booking-form h2 {
+      font-family: var(--display);
+      font-size: 26px;
+      color: var(--dawn-soft);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .booking-form label {
+      font-size: 13px;
+      color: var(--mist);
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .booking-form input,
+    .booking-form select,
+    .booking-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(3, 13, 19, 0.5);
+      color: var(--foam);
+      font-family: var(--body);
+      font-size: 14px;
+      transition: border-color .3s ease;
+      margin-bottom: 16px;
+    }
+    .booking-form input:focus,
+    .booking-form select:focus,
+    .booking-form textarea:focus {
+      border-color: var(--dawn);
+      outline: none;
+    }
+    .booking-form textarea {
+      height: 80px;
+      resize: vertical;
+    }
+    .booking-form .btn--submit {
+      padding: 14px 32px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: all .3s ease;
+      display: inline-block;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: var(--dawn);
+      color: var(--abyss);
+      width: 100%;
+    }
+    .booking-form .btn--submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px -8px rgba(243,163,92,0.6);
+    }
+    .booking-form .error {
+      color: #ff6b6b;
+      font-size: 13px;
+      margin: -8px 0 12px;
+      display: none;
+    }
+
+    /* Booking Summary */
+    .booking-summary {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px 28px;
+      backdrop-filter: blur(4px);
+      box-shadow: var(--shadow-glow);
+      display: none;
+    }
+    .booking-summary.active {
+      display: block;
+    }
+    .booking-summary h3 {
+      font-family: var(--display);
+      font-size: 24px;
+      color: var(--dawn-soft);
+      font-weight: 500;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+      margin-bottom: 16px;
+    }
+    .summary-grid .label {
+      color: var(--mist);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .summary-grid .value {
+      color: var(--foam);
+      font-size: 14px;
+      font-weight: 600;
+      text-align: right;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 16px;
+    }
+    .total-row .total-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--mist);
+    }
+    .total-row .total-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dawn);
+    }
+    .booking-summary .actions {
+      display: flex;
+      gap: 12px;
+    }
+    .booking-summary .actions .btn {
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: all .3s ease;
+      display: inline-block;
+      border: 1px solid transparent;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+    }
+    .booking-summary .actions .btn--secondary {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--mist);
+    }
+    .booking-summary .actions .btn--secondary:hover {
+      border-color: var(--dawn);
+      color: var(--foam);
+    }
+    .booking-summary .actions .btn--whatsapp {
+      background: #25D366;
+      color: #fff;
+    }
+    .booking-summary .actions .btn--whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    }
+    .booking-summary .confirmation-note {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(37, 211, 102, 0.08);
+      border: 1px solid rgba(37, 211, 102, 0.2);
+      text-align: center;
+      font-size: 14px;
+      color: var(--mist);
+      display: none;
+    }
+    .booking-summary .confirmation-note.show {
+      display: block;
+    }
+    .booking-summary .confirmation-note strong {
+      color: var(--dawn-soft);
+    }
+
+    /* ===== SOCIAL DOCK — premium, glossy ===== */
+    .social-dock {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 850;
+    }
+    .social-dock a {
+      width: 44px;
+      height: 44px;
+      background: rgba(7, 35, 48, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), border-color .3s ease, background .3s ease, box-shadow .3s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .social-dock a:hover {
+      transform: translateY(-4px) scale(1.05);
+      border-color: var(--dawn);
+      background: rgba(15, 63, 82, 0.9);
+      box-shadow: 0 8px 28px rgba(243,163,92,0.25);
+    }
+    .social-dock svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--mist);
+      fill: none;
+      transition: stroke .3s ease, fill .3s ease;
+    }
+    .social-dock a[data-fill] svg { fill: var(--mist); stroke: none; }
+    .social-dock a:hover svg { stroke: var(--dawn-soft); }
+    .social-dock a:hover svg[data-fillicon] { fill: var(--dawn-soft); }
+    .social-dock a:hover svg { fill: var(--dawn-soft); }
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .booking-section { grid-template-columns: 1fr; gap: 30px; }
+    }
+    @media (max-width: 768px) {
+      .header { padding: 12px 5%; }
+      .mobile-menu-btn { display: block; }
+      .nav-menu {
+        position: fixed;
+        top: 0; right: 0;
+        height: 100vh;
+        width: 76%;
+        max-width: 320px;
+        background: rgba(3,13,19,0.97);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 28px;
+        padding: 0 40px;
+        transform: translateX(100%);
+        transition: transform .4s cubic-bezier(.25,.46,.45,.94);
+        border-left: 1px solid var(--line);
+        box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+      }
+      .nav-menu.active { transform: translateX(0); }
+      .main-content { padding: 100px 5% 50px; }
+      .page-hero { padding: 20px 0 20px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .booking-form { padding: 24px 18px; }
+      .booking-summary { padding: 24px 18px; }
+      .summary-grid { grid-template-columns: 1fr 1fr; gap: 4px 12px; }
+      .booking-summary .actions { flex-direction: column; }
+      .social-dock { bottom: 80px; right: 16px; }
+      .social-dock a { width: 40px; height: 40px; }
+    }
+    @media (max-width: 480px) {
+      .page-hero h1 { font-size: 32px; }
+      .pricing-card .price { font-size: 26px; }
+      .booking-form h2 { font-size: 22px; }
+      .booking-summary h3 { font-size: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background overlay -->
+<div class="body-overlay"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="siteHeader">
+  <div class="logo">
+    <a href="index.html">
+      <img src="./images/gallery/favicon.ico" alt="Mirissa Jetliner Logo">
+      <span>Mirissa Jetliner</span>
+    </a>
+  </div>
+  <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle menu">☰</button>
+  <nav class="nav-menu" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="about-us.html">About Us</a>
+    <a href="blog.html">Blog</a>
+    <a href="out-activities.html">Activities</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact-us.html">Contact</a>
+    <a href="research.html">Research</a>
+  </nav>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main class="main-content">
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="eyebrow">Secure Your Spot</div>
+    <h1>Book Your Adventure</h1>
+    <p>Reserve your seat on our premium whale watching vessel. All tours include breakfast, Wi-Fi, life jackets, and more.</p>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing-grid">
+    <div class="pricing-card">
+      <h3>Adult Ticket</h3>
+      <div class="price">LKR 7,500 <small>/ person</small></div>
+      <ul>
+        <li>Above 12 years</li>
+        <li>Breakfast &amp; refreshments</li>
+        <li>Life jacket &amp; insurance</li>
+        <li>Free Wi-Fi &amp; music</li>
+      </ul>
+      <a href="#booking-form" class="btn">Book Now</a>
+    </div>
+    <div class="pricing-card">
+      <h3>Child Ticket</h3>
+      <div class="price">LKR 4,000 <small>/ person</small></div>
+      <ul>
+        <li>Below 12 years</li>
+        <li>Breakfast &amp; refreshments</li>
+        <li>Life jacket &amp; insurance</li>
+        <li>Free Wi-Fi &amp; music</li>
+      </ul>
+      <a href="#booking-form" class="btn">Book Now</a>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section class="booking-section" id="booking-form">
+    <!-- Form -->
+    <div class="booking-form">
+      <h2>Reserve Your Seats</h2>
+      <div class="error" id="formError">Please fill in all required fields.</div>
+
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" placeholder="Enter your full name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" required />
+
+      <label for="tourDate">Tour Date</label>
+      <input type="date" id="tourDate" required />
+
+      <label for="tourTime">Time Slot</label>
+      <select id="tourTime" required>
+        <option value="" disabled selected>Select a time</option>
+        <option value="06:30">06:30 AM – Dawn Departure</option>
+        <option value="10:00">10:00 AM – Morning Cruise</option>
+      </select>
+
+      <label for="adultCount">Adult Tickets (12+)</label>
+      <select id="adultCount">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label for="childCount">Child Tickets (under 12)</label>
+      <select id="childCount">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label for="specialRequests">Special Requests (optional)</label>
+      <textarea id="specialRequests" placeholder="Dietary needs, mobility assistance, etc."></textarea>
+
+      <button class="btn--submit" id="previewBtn">Preview Booking</button>
+    </div>
+
+    <!-- Summary -->
+    <div class="booking-summary" id="bookingSummary">
+      <h3>Booking Summary</h3>
+      <div class="summary-grid">
+        <div class="label">Name</div>
+        <div class="value" id="sName">—</div>
+        <div class="label">Email</div>
+        <div class="value" id="sEmail">—</div>
+        <div class="label">Phone</div>
+        <div class="value" id="sPhone">—</div>
+        <div class="label">Date</div>
+        <div class="value" id="sDate">—</div>
+        <div class="label">Time</div>
+        <div class="value" id="sTime">—</div>
+        <div class="label">Adult Tickets</div>
+        <div class="value" id="sAdult">—</div>
+        <div class="label">Child Tickets</div>
+        <div class="value" id="sChild">—</div>
+        <div class="label">Special Requests</div>
+        <div class="value" id="sRequests">—</div>
+      </div>
+      <div class="total-row">
+        <span class="total-label">Total Price</span>
+        <span class="total-value" id="sTotal">LKR 0</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn--secondary" id="editBtn">Edit Booking</button>
+        <a class="btn btn--whatsapp" id="whatsappBtn" href="#" target="_blank" rel="noopener">Send via WhatsApp</a>
+      </div>
+      <div class="confirmation-note" id="confirmationNote">
+        ✅ Booking sent via WhatsApp. We'll contact you shortly to confirm.
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== SOCIAL DOCK (premium, same as index) ===== -->
+<div class="social-dock">
+  <a href="https://wa.me/94777728439" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </a>
+  <a href="https://www.facebook.com/share/1G4xsrWQTt/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+  </a>
+  <a href="https://www.tiktok.com/@mirissajetliner" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+  </a>
+  <a href="https://www.instagram.com/nihalwalewatching?igsh=MTlsZzdvcTNiMnZ2cg==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="19.5" cy="4.5" r="1.5"/></svg>
+  </a>
+  <a href="https://www.tripadvisor.com/Profile/jetlinermirissa" target="_blank" rel="noopener noreferrer" aria-label="Tripadvisor" title="Tripadvisor">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+  </a>
+  <a href="https://www.youtube.com/channel/UCr-fLwz-vOUq23pK5VtVWiA" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
+    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+  </a>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+    navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('active')));
+  }
+
+  // Header scroll effect
+  const header = document.getElementById('siteHeader');
+  const onScrollHeader = () => {
+    if (header) header.classList.toggle('scrolled', window.scrollY > 40);
+  };
+  document.addEventListener('scroll', onScrollHeader, { passive: true });
+  onScrollHeader();
+
+  // Booking logic
+  const previewBtn = document.getElementById('previewBtn');
+  const editBtn = document.getElementById('editBtn');
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  const formError = document.getElementById('formError');
+  const summary = document.getElementById('bookingSummary');
+  const confirmationNote = document.getElementById('confirmationNote');
+
+  const ADULT_PRICE = 7500;
+  const CHILD_PRICE = 4000;
+
+  function formatCurrency(amount) {
+    return 'LKR ' + amount.toLocaleString();
+  }
+
+  function getField(id) {
+    return document.getElementById(id);
+  }
+
+  function getVal(id) {
+    const el = getField(id);
+    return el ? el.value.trim() : '';
+  }
+
+  function getSelectVal(id) {
+    const el = getField(id);
+    return el ? el.value : '';
+  }
+
+  function getSelectText(id) {
+    const el = getField(id);
+    if (!el) return '';
+    const selected = el.options[el.selectedIndex];
+    return selected ? selected.text : '';
+  }
+
+  function buildSummary() {
+    const name = getVal('fullName');
+    const email = getVal('email');
+    const phone = getVal('phone');
+    const date = getVal('tourDate');
+    const time = getSelectText('tourTime');
+    const adultCount = parseInt(getSelectVal('adultCount')) || 0;
+    const childCount = parseInt(getSelectVal('childCount')) || 0;
+    const requests = getVal('specialRequests');
+
+    // Validate
+    if (!name || !email || !phone || !date || !time || (adultCount === 0 && childCount === 0)) {
+      formError.style.display = 'block';
+      return false;
+    }
+    formError.style.display = 'none';
+
+    // Populate summary
+    document.getElementById('sName').textContent = name;
+    document.getElementById('sEmail').textContent = email;
+    document.getElementById('sPhone').textContent = phone;
+    document.getElementById('sDate').textContent = date;
+    document.getElementById('sTime').textContent = time;
+    document.getElementById('sAdult').textContent = adultCount + ' × LKR ' + ADULT_PRICE.toLocaleString();
+    document.getElementById('sChild').textContent = childCount + ' × LKR ' + CHILD_PRICE.toLocaleString();
+    document.getElementById('sRequests').textContent = requests || 'None';
+
+    const total = (adultCount * ADULT_PRICE) + (childCount * CHILD_PRICE);
+    document.getElementById('sTotal').textContent = formatCurrency(total);
+
+    // Build WhatsApp link
+    const msg = `New Booking from Mirissa Jetliner website%0A%0A` +
+                `Name: ${name}%0A` +
+                `Email: ${email}%0A` +
+                `Phone: ${phone}%0A` +
+                `Date: ${date}%0A` +
+                `Time: ${time}%0A` +
+                `Adult Tickets: ${adultCount} × LKR ${ADULT_PRICE.toLocaleString()}%0A` +
+                `Child Tickets: ${childCount} × LKR ${CHILD_PRICE.toLocaleString()}%0A` +
+                `Total: LKR ${total.toLocaleString()}%0A` +
+                `Special Requests: ${requests || 'None'}`;
+
+    whatsappBtn.href = 'https://wa.me/94777728439?text=' + msg;
+    whatsappBtn.dataset.total = total;
+
+    return true;
+  }
+
+  previewBtn.addEventListener('click', () => {
+    if (buildSummary()) {
+      summary.classList.add('active');
+      summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      confirmationNote.classList.remove('show');
+    }
+  });
+
+  editBtn.addEventListener('click', () => {
+    summary.classList.remove('active');
+    document.getElementById('booking-form').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  whatsappBtn.addEventListener('click', (e) => {
+    // Show confirmation note after a short delay (when WhatsApp opens)
+    setTimeout(() => {
+      confirmationNote.classList.add('show');
+    }, 500);
+  });
+
+  // Pre-fill activity from URL query param (from out-activities.html)
+  (function prefillActivity() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const activity = params.get('activity');
+      if (activity) {
+        // Add a small note in special requests
+        const req = document.getElementById('specialRequests');
+        if (req && !req.value) {
+          req.value = 'Activity: ' + activity;
+        }
+      }
+    } catch (e) {}
+  })();
+</script>
+</body>
+</html>

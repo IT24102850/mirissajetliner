@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirissa Jetliner - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00c4cc;
+            --secondary: #8a2be2;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --success: #28a745;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
+
+        /* Sidebar - Collapsible on mobile */
+        .sidebar {
+            background-color: var(--dark);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            width: 250px;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 10px;
+            min-width: 20px;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        /* Mobile header with toggle button */
+        .mobile-header {
+            display: none;
+            background-color: var(--dark);
+            color: white;
+            padding: 10px 15px;
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+        }
+
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .stat-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stat-card .label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table th, .table td {
+            white-space: nowrap;
+        }
+
+        /* Badges */
+        .badge-paid {
+            background-color: var(--success);
+        }
+
+        .badge-pending {
+            background-color: var(--warning);
+            color: #212529;
+        }
+
+        .badge-failed {
+            background-color: var(--danger);
+        }
+
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 250px;
+            min-height: 200px;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding-top: 70px;
+            }
+
+            .mobile-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Adjust card padding on mobile */
+            .card-body {
+                padding: 1rem;
+            }
+
+            /* Make stat cards stack vertically */
+            .stat-card .value {
+                font-size: 1.3rem;
+            }
+
+            /* Adjust table cell padding */
+            .table td, .table th {
+                padding: 0.5rem;
+            }
+
+            /* Make action buttons smaller */
+            .btn-sm {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 576px) {
+            /* Stack form elements vertically */
+            .form-group {
+                margin-bottom: 0.5rem;
+            }
+
+            /* Make buttons full width */
+            .btn-mobile-full {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Adjust chart height */
+            .chart-container {
+                height: 200px;
+            }
+
+            /* Hide less important columns in tables */
+            .hide-on-mobile {
+                display: none;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .sidebar, .mobile-header, .no-print {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                padding: 0 !important;
+            }
+
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #dee2e6 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Mobile Header -->
+<div class="mobile-header">
+    <div>
+        <button class="btn btn-sm btn-outline-light" id="sidebarToggle">
+            <i class="bi bi-list"></i>
+        </button>
+        <span class="ms-2">Mirissa Jetliner</span>
+    </div>
+    <div>
+        <button class="btn btn-sm btn-outline-light">
+            <i class="bi bi-bell"></i>
+        </button>
+    </div>
+</div>
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar p-3" id="sidebar">
+        <div class="text-center mb-4">
+            <h4>Mirissa Jetliner</h4>
+            <small>Admin Dashboard</small>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#dashboard" data-bs-toggle="tab">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#bookings" data-bs-toggle="tab">
+                    <i class="bi bi-calendar-check"></i> Bookings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#customers" data-bs-toggle="tab">
+                    <i class="bi bi-people"></i> Customers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#payments" data-bs-toggle="tab">
+                    <i class="bi bi-credit-card"></i> Payments
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#settings" data-bs-toggle="tab">
+                    <i class="bi bi-gear"></i> Settings
+                </a>
+            </li>
+            <li class="nav-item mt-4">
+                <a class="nav-link text-danger" href="#">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="tab-content">
+            <!-- Dashboard Tab -->
+            <div class="tab-pane fade show active" id="dashboard">
+                <h2 class="mb-4">Dashboard Overview</h2>
+
+                <!-- Stats Cards -->
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card stat-card">
+                            <div class="value text-primary">24</div>
+                            <div class="label">Bookings Today</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card stat-card">
+                            <div class="value text-primary">156</div>
+                            <div class="label">This Week</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card stat-card">
+                            <div class="value text-primary">542</div>
+                            <div class="label">This Month</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue and Charts -->
+                <div class="row mt-4">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Revenue Summary (LKR)
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="revenueChart"></canvas>
+                                </div>
+                                <div class="mt-3">
+                                    <span class="badge bg-primary me-2">Today: LKR 120,000</span>
+                                    <span class="badge bg-primary me-2">Week: LKR 780,000</span>
+                                    <span class="badge bg-primary">Month: LKR 2,710,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Ticket Distribution
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="ticketChart"></canvas>
+                                </div>
+                                <div class="mt-3 text-center">
+                                    <span class="badge bg-primary me-2">Adults: 68%</span>
+                                    <span class="badge bg-success">Children: 32%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Tours and Alerts -->
+                <div class="row mt-4">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Upcoming Tours (Next 7 Days)
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush">
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">Tomorrow - 6:30 AM</h6>
+                                            <small>24 bookings</small>
+                                        </div>
+                                        <p class="mb-1">Whale Watching Tour</p>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">Friday - 6:30 AM</h6>
+                                            <small>32 bookings</small>
+                                        </div>
+                                        <p class="mb-1">Whale Watching Tour</p>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">Saturday - 6:30 AM</h6>
+                                            <small>45 bookings</small>
+                                        </div>
+                                        <p class="mb-1">Whale Watching Tour</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span>Alerts</span>
+                                <span class="badge bg-danger rounded-pill">3 new</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-warning alert-dismissible fade show mb-2" role="alert">
+                                    <strong>Payment Error:</strong> Booking #WT-2023-156 failed
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                                <div class="alert alert-danger alert-dismissible fade show mb-2" role="alert">
+                                    <strong>Cancellation:</strong> John Doe cancelled booking #WT-2023-142
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                    <strong>New Booking:</strong> 5 tickets for Friday tour
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookings Tab -->
+            <div class="tab-pane fade" id="bookings">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Bookings Manager</h2>
+                    <div class="d-flex">
+                        <button class="btn btn-sm btn-primary me-2 btn-mobile-full">
+                            <i class="bi bi-filter"></i> <span class="d-none d-md-inline">Filter</span>
+                        </button>
+                        <button class="btn btn-sm btn-success btn-mobile-full">
+                            <i class="bi bi-download"></i> <span class="d-none d-md-inline">Export CSV</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th class="hide-on-mobile">Name</th>
+                                    <th>Date</th>
+                                    <th>Tickets</th>
+                                    <th class="hide-on-mobile">Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>WT-2023-156</td>
+                                    <td class="hide-on-mobile">John Smith</td>
+                                    <td>Jun 15</td>
+                                    <td>2A / 1C</td>
+                                    <td class="hide-on-mobile">LKR 25,000</td>
+                                    <td><span class="badge badge-paid rounded-pill">Paid</span></td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>WT-2023-155</td>
+                                    <td class="hide-on-mobile">Sarah Johnson</td>
+                                    <td>Jun 15</td>
+                                    <td>3A</td>
+                                    <td class="hide-on-mobile">LKR 30,000</td>
+                                    <td><span class="badge badge-paid rounded-pill">Paid</span></td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>WT-2023-154</td>
+                                    <td class="hide-on-mobile">Michael Brown</td>
+                                    <td>Jun 14</td>
+                                    <td>2A / 2C</td>
+                                    <td class="hide-on-mobile">LKR 30,000</td>
+                                    <td><span class="badge badge-pending rounded-pill">Pending</span></td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination pagination-sm justify-content-center mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customers Tab -->
+            <div class="tab-pane fade" id="customers">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Customer Database</h2>
+                    <div class="d-flex">
+                        <button class="btn btn-sm btn-primary me-2 btn-mobile-full">
+                            <i class="bi bi-funnel"></i> <span class="d-none d-md-inline">Filter</span>
+                        </button>
+                        <button class="btn btn-sm btn-success btn-mobile-full">
+                            <i class="bi bi-download"></i> <span class="d-none d-md-inline">Export</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th class="hide-on-mobile">Email</th>
+                                    <th>Phone</th>
+                                    <th>Bookings</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>C-1001</td>
+                                    <td>John Smith</td>
+                                    <td class="hide-on-mobile">john@example.com</td>
+                                    <td>+94 77 123 4567</td>
+                                    <td>3</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-outline-secondary"><i class="bi bi-envelope"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>C-1002</td>
+                                    <td>Sarah Johnson</td>
+                                    <td class="hide-on-mobile">sarah@example.com</td>
+                                    <td>+94 76 234 5678</td>
+                                    <td>5</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-outline-secondary"><i class="bi bi-envelope"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination pagination-sm justify-content-center mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payments Tab -->
+            <div class="tab-pane fade" id="payments">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Payment Manager</h2>
+                    <div class="d-flex">
+                        <button class="btn btn-sm btn-primary me-2 btn-mobile-full">
+                            <i class="bi bi-filter"></i> <span class="d-none d-md-inline">Filter</span>
+                        </button>
+                        <button class="btn btn-sm btn-success btn-mobile-full">
+                            <i class="bi bi-download"></i> <span class="d-none d-md-inline">Export</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Txn ID</th>
+                                    <th>Booking ID</th>
+                                    <th>Amount</th>
+                                    <th class="hide-on-mobile">Method</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>TXN-2023-156</td>
+                                    <td>WT-2023-156</td>
+                                    <td>LKR 25,000</td>
+                                    <td class="hide-on-mobile">Credit Card</td>
+                                    <td>Jun 14</td>
+                                    <td><span class="badge bg-success rounded-pill">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>TXN-2023-155</td>
+                                    <td>WT-2023-155</td>
+                                    <td>LKR 30,000</td>
+                                    <td class="hide-on-mobile">PayHere</td>
+                                    <td>Jun 14</td>
+                                    <td><span class="badge bg-success rounded-pill">Completed</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination pagination-sm justify-content-center mb-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        PayHere Notification Logs
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-sm mb-0">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th class="hide-on-mobile">Message</th>
+                                    <th>Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Jun 14 15:45</td>
+                                    <td><span class="badge bg-success">Success</span></td>
+                                    <td class="hide-on-mobile">Payment completed</td>
+                                    <td>LKR 30,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Jun 14 14:30</td>
+                                    <td><span class="badge bg-success">Success</span></td>
+                                    <td class="hide-on-mobile">Payment completed</td>
+                                    <td>LKR 25,000</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-pane fade" id="settings">
+                <h2 class="mb-4">System Settings</h2>
+
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Tour Time Slots
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Default Tour Time</label>
+                                    <input type="time" class="form-control" value="06:30">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Additional Time Slots</label>
+                                    <div class="input-group mb-2">
+                                        <input type="time" class="form-control" value="09:00">
+                                        <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <input type="time" class="form-control" value="11:30">
+                                        <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="time" class="form-control" placeholder="Add new time slot">
+                                        <button class="btn btn-outline-primary" type="button"><i class="bi bi-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="mondaySwitch" checked>
+                                            <label class="form-check-label" for="mondaySwitch">Monday Tours</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="tuesdaySwitch" checked>
+                                            <label class="form-check-label" for="tuesdaySwitch">Tuesday Tours</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                Ticket Prices
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Adult Ticket Price (LKR)</label>
+                                    <input type="number" class="form-control" value="10000">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Child Ticket Price (LKR)</label>
+                                    <input type="number" class="form-control" value="5000">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Family Package (2A+2C)</label>
+                                    <input type="number" class="form-control" value="25000">
+                                </div>
+                                <button class="btn btn-primary w-100">Update Prices</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Email Templates
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Booking Confirmation</label>
+                                    <select class="form-select mb-2">
+                                        <option>Default Template</option>
+                                        <option>Summer Special Template</option>
+                                    </select>
+                                    <textarea class="form-control" rows="4">Dear {customer_name}, Thank you for booking with Mirissa Jetliner...</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Payment Reminder</label>
+                                    <select class="form-select mb-2">
+                                        <option>Default Template</option>
+                                        <option>Friendly Reminder Template</option>
+                                    </select>
+                                    <textarea class="form-control" rows="4">Dear {customer_name}, This is a reminder about your upcoming tour...</textarea>
+                                </div>
+                                <button class="btn btn-primary w-100">Save Templates</button>
+                            </div>
+                        </div>
+
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                Admin Settings
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Change Password</label>
+                                    <input type="password" class="form-control mb-2" placeholder="Current Password">
+                                    <input type="password" class="form-control mb-2" placeholder="New Password">
+                                    <input type="password" class="form-control" placeholder="Confirm New Password">
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="twoFactorCheck">
+                                    <label class="form-check-label" for="twoFactorCheck">Two-Factor Authentication</label>
+                                </div>
+                                <button class="btn btn-primary w-100">Update Settings</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Admin Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+<script>
+    // Initialize charts
+    document.addEventListener('DOMContentLoaded', function() {
+        // Revenue Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue (LKR)',
+                    data: [1200000, 1500000, 1800000, 2100000, 2400000, 2710000],
+                    backgroundColor: 'rgba(0, 196, 204, 0.7)',
+                    borderColor: 'rgba(0, 196, 204, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'LKR ' + value.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'LKR ' + context.raw.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Ticket Distribution Chart
+        const ticketCtx = document.getElementById('ticketChart').getContext('2d');
+        const ticketChart = new Chart(ticketCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Adult Tickets', 'Child Tickets'],
+                datasets: [{
+                    data: [68, 32],
+                    backgroundColor: [
+                        'rgba(0, 196, 204, 0.7)',
+                        'rgba(138, 43, 226, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Sidebar toggle for mobile
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 992) {
+                const isClickInsideSidebar = sidebar.contains(event.target);
+                const isClickOnToggle = sidebarToggle.contains(event.target);
+
+                if (!isClickInsideSidebar && !isClickOnToggle && sidebar.classList.contains('show')) {
+                    sidebar.classList.remove('show');
+                }
+            }
+        });
+
+        // Show login modal if not authenticated (for demo purposes)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('login')) {
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
+        }
+    });
+</script>
+</body>
+</html>
