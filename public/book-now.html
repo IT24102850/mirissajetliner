@@ -268,6 +268,199 @@
     .booking-alt { margin-top: 18px; text-align: center; font-size: 13px; color: var(--mist); }
     .booking-alt a { color: var(--dawn-soft); text-decoration: underline; text-underline-offset: 3px; }
 
+    /* Fallback: the original WhatsApp form, shown only if the Unify widget
+       cannot load (Unify not deployed yet, network blocked, wrong host). */
+    .booking-fallback {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .booking-fallback[hidden], .booking-widget[hidden] { display: none; }
+    .booking-loading { padding: 40px 0; text-align: center; color: var(--mist); font-size: 14px; }
+    .booking-form {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px 28px;
+      backdrop-filter: blur(4px);
+      box-shadow: var(--shadow-glow);
+    }
+    .booking-form h2 {
+      font-family: var(--display);
+      font-size: 26px;
+      color: var(--dawn-soft);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .booking-form label {
+      font-size: 13px;
+      color: var(--mist);
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .booking-form input,
+    .booking-form select,
+    .booking-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(3, 13, 19, 0.5);
+      color: var(--foam);
+      font-family: var(--body);
+      font-size: 14px;
+      transition: border-color .3s ease;
+      margin-bottom: 16px;
+    }
+    .booking-form input:focus,
+    .booking-form select:focus,
+    .booking-form textarea:focus {
+      border-color: var(--dawn);
+      outline: none;
+    }
+    .booking-form textarea {
+      height: 80px;
+      resize: vertical;
+    }
+    .booking-form .btn--submit {
+      padding: 14px 32px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: all .3s ease;
+      display: inline-block;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: var(--dawn);
+      color: var(--abyss);
+      width: 100%;
+    }
+    .booking-form .btn--submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px -8px rgba(243,163,92,0.6);
+    }
+    .booking-form .error {
+      color: #ff6b6b;
+      font-size: 13px;
+      margin: -8px 0 12px;
+      display: none;
+    }
+
+    /* Booking Summary */
+    .booking-summary {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px 28px;
+      backdrop-filter: blur(4px);
+      box-shadow: var(--shadow-glow);
+      display: none;
+    }
+    .booking-summary.active {
+      display: block;
+    }
+    .booking-summary h3 {
+      font-family: var(--display);
+      font-size: 24px;
+      color: var(--dawn-soft);
+      font-weight: 500;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+      margin-bottom: 16px;
+    }
+    .summary-grid .label {
+      color: var(--mist);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .summary-grid .value {
+      color: var(--foam);
+      font-size: 14px;
+      font-weight: 600;
+      text-align: right;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 16px;
+    }
+    .total-row .total-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--mist);
+    }
+    .total-row .total-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dawn);
+    }
+    .booking-summary .actions {
+      display: flex;
+      gap: 12px;
+    }
+    .booking-summary .actions .btn {
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: all .3s ease;
+      display: inline-block;
+      border: 1px solid transparent;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+    }
+    .booking-summary .actions .btn--secondary {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--mist);
+    }
+    .booking-summary .actions .btn--secondary:hover {
+      border-color: var(--dawn);
+      color: var(--foam);
+    }
+    .booking-summary .actions .btn--whatsapp {
+      background: #25D366;
+      color: #fff;
+    }
+    .booking-summary .actions .btn--whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    }
+    .booking-summary .confirmation-note {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(37, 211, 102, 0.08);
+      border: 1px solid rgba(37, 211, 102, 0.2);
+      text-align: center;
+      font-size: 14px;
+      color: var(--mist);
+      display: none;
+    }
+    .booking-summary .confirmation-note.show {
+      display: block;
+    }
+    .booking-summary .confirmation-note strong {
+      color: var(--dawn-soft);
+    }
+
     /* ===== SOCIAL DOCK — premium, glossy ===== */
     .social-dock {
       position: fixed;
@@ -335,6 +528,13 @@
       .main-content { padding: 100px 5% 50px; }
       .page-hero { padding: 20px 0 20px; }
       .pricing-grid { grid-template-columns: 1fr; }
+      .booking-fallback { grid-template-columns: 1fr; gap: 30px; }
+      .booking-form { padding: 24px 18px; }
+      .booking-summary { padding: 24px 18px; }
+      .summary-grid { grid-template-columns: 1fr 1fr; gap: 4px 12px; }
+      .booking-summary .actions { flex-direction: column; }
+      .booking-form h2 { font-size: 22px; }
+      .booking-summary h3 { font-size: 20px; }
       .social-dock { bottom: 80px; right: 16px; }
       .social-dock a { width: 40px; height: 40px; }
     }
@@ -422,13 +622,106 @@
          script src          the deployed Unify frontend + /embed.js
        Docs: unify repo -> docs/website-booking-widget.md -->
   <section class="booking-section" id="booking-form">
-    <div class="booking-widget">
+    <div class="booking-widget" id="unifyWidget">
       <div data-unify-booking="98606fd7-1bdc-4cba-ae2d-26b8daeae15c"
            data-accent="#1b7a8c"
            data-theme="dark"
            data-whatsapp="94777728439"
-           data-min-height="820"></div>
-      <script src="https://UNIFY-HOST/embed.js" async></script>
+           data-min-height="820"><p class="booking-loading">Loading booking form…</p></div>
+      <script src="https://UNIFY-HOST/embed.js" async
+              onerror="window.__unifyFailed = true; if (window.__unifyFallback) window.__unifyFallback();"></script>
+    </div>
+
+    <!-- Fallback: the original WhatsApp form. Hidden while the Unify widget
+         is working; shown automatically if embed.js fails to load or does
+         not mount within a few seconds, so the page always has a way to book. -->
+    <div class="booking-fallback" id="bookingFallback" hidden>
+    <!-- Form -->
+    <div class="booking-form">
+      <h2>Reserve Your Seats</h2>
+      <div class="error" id="formError">Please fill in all required fields.</div>
+
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" placeholder="Enter your full name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" required />
+
+      <label for="tourDate">Tour Date</label>
+      <input type="date" id="tourDate" required />
+
+      <label for="tourTime">Time Slot</label>
+      <select id="tourTime" required>
+        <option value="" disabled selected>Select a time</option>
+        <option value="06:30">06:30 AM – Dawn Departure</option>
+        <option value="10:00">10:00 AM – Morning Cruise</option>
+      </select>
+
+      <label for="adultCount">Adult Tickets (12+)</label>
+      <select id="adultCount">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label for="childCount">Child Tickets (under 12)</label>
+      <select id="childCount">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label for="specialRequests">Special Requests (optional)</label>
+      <textarea id="specialRequests" placeholder="Dietary needs, mobility assistance, etc."></textarea>
+
+      <button class="btn--submit" id="previewBtn">Preview Booking</button>
+    </div>
+
+    <!-- Summary -->
+    <div class="booking-summary" id="bookingSummary">
+      <h3>Booking Summary</h3>
+      <div class="summary-grid">
+        <div class="label">Name</div>
+        <div class="value" id="sName">—</div>
+        <div class="label">Email</div>
+        <div class="value" id="sEmail">—</div>
+        <div class="label">Phone</div>
+        <div class="value" id="sPhone">—</div>
+        <div class="label">Date</div>
+        <div class="value" id="sDate">—</div>
+        <div class="label">Time</div>
+        <div class="value" id="sTime">—</div>
+        <div class="label">Adult Tickets</div>
+        <div class="value" id="sAdult">—</div>
+        <div class="label">Child Tickets</div>
+        <div class="value" id="sChild">—</div>
+        <div class="label">Special Requests</div>
+        <div class="value" id="sRequests">—</div>
+      </div>
+      <div class="total-row">
+        <span class="total-label">Total Price</span>
+        <span class="total-value" id="sTotal">LKR 0</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn--secondary" id="editBtn">Edit Booking</button>
+        <a class="btn btn--whatsapp" id="whatsappBtn" href="#" target="_blank" rel="noopener">Send via WhatsApp</a>
+      </div>
+      <div class="confirmation-note" id="confirmationNote">
+        ✅ Booking sent via WhatsApp. We'll contact you shortly to confirm.
+      </div>
+    </div>
+    </div>
+
+    <div class="booking-widget-foot">
       <p class="booking-alt">
         Prefer to chat? <a href="https://wa.me/94777728439?text=Hi%20Mirissa%20Jetliner%2C%20I%27d%20like%20to%20book%20a%20whale%20watching%20tour." target="_blank" rel="noopener">Message us on WhatsApp</a>
         and we'll book it for you.
@@ -477,6 +770,144 @@
   document.addEventListener('scroll', onScrollHeader, { passive: true });
   onScrollHeader();
 
+
+  // Booking fallback: show the WhatsApp form if the Unify widget never mounts.
+  (function () {
+    var widget = document.getElementById('unifyWidget');
+    var fallback = document.getElementById('bookingFallback');
+    if (!widget || !fallback) return;
+    var shown = false;
+    window.__unifyFallback = function () {
+      if (shown) return;
+      shown = true;
+      widget.hidden = true;
+      fallback.hidden = false;
+    };
+    if (window.__unifyFailed) window.__unifyFallback();
+    // No iframe after a generous wait = the script loaded but could not mount.
+    setTimeout(function () {
+      if (!widget.querySelector('iframe')) window.__unifyFallback();
+    }, 5000);
+  })();
+
+  // Booking logic
+  const previewBtn = document.getElementById('previewBtn');
+  const editBtn = document.getElementById('editBtn');
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  const formError = document.getElementById('formError');
+  const summary = document.getElementById('bookingSummary');
+  const confirmationNote = document.getElementById('confirmationNote');
+
+  const ADULT_PRICE = 7500;
+  const CHILD_PRICE = 4000;
+
+  function formatCurrency(amount) {
+    return 'LKR ' + amount.toLocaleString();
+  }
+
+  function getField(id) {
+    return document.getElementById(id);
+  }
+
+  function getVal(id) {
+    const el = getField(id);
+    return el ? el.value.trim() : '';
+  }
+
+  function getSelectVal(id) {
+    const el = getField(id);
+    return el ? el.value : '';
+  }
+
+  function getSelectText(id) {
+    const el = getField(id);
+    if (!el) return '';
+    const selected = el.options[el.selectedIndex];
+    return selected ? selected.text : '';
+  }
+
+  function buildSummary() {
+    const name = getVal('fullName');
+    const email = getVal('email');
+    const phone = getVal('phone');
+    const date = getVal('tourDate');
+    const time = getSelectText('tourTime');
+    const adultCount = parseInt(getSelectVal('adultCount')) || 0;
+    const childCount = parseInt(getSelectVal('childCount')) || 0;
+    const requests = getVal('specialRequests');
+
+    // Validate
+    if (!name || !email || !phone || !date || !time || (adultCount === 0 && childCount === 0)) {
+      formError.style.display = 'block';
+      return false;
+    }
+    formError.style.display = 'none';
+
+    // Populate summary
+    document.getElementById('sName').textContent = name;
+    document.getElementById('sEmail').textContent = email;
+    document.getElementById('sPhone').textContent = phone;
+    document.getElementById('sDate').textContent = date;
+    document.getElementById('sTime').textContent = time;
+    document.getElementById('sAdult').textContent = adultCount + ' × LKR ' + ADULT_PRICE.toLocaleString();
+    document.getElementById('sChild').textContent = childCount + ' × LKR ' + CHILD_PRICE.toLocaleString();
+    document.getElementById('sRequests').textContent = requests || 'None';
+
+    const total = (adultCount * ADULT_PRICE) + (childCount * CHILD_PRICE);
+    document.getElementById('sTotal').textContent = formatCurrency(total);
+
+    // Build WhatsApp link
+    const msg = `New Booking from Mirissa Jetliner website%0A%0A` +
+                `Name: ${name}%0A` +
+                `Email: ${email}%0A` +
+                `Phone: ${phone}%0A` +
+                `Date: ${date}%0A` +
+                `Time: ${time}%0A` +
+                `Adult Tickets: ${adultCount} × LKR ${ADULT_PRICE.toLocaleString()}%0A` +
+                `Child Tickets: ${childCount} × LKR ${CHILD_PRICE.toLocaleString()}%0A` +
+                `Total: LKR ${total.toLocaleString()}%0A` +
+                `Special Requests: ${requests || 'None'}`;
+
+    whatsappBtn.href = 'https://wa.me/94777728439?text=' + msg;
+    whatsappBtn.dataset.total = total;
+
+    return true;
+  }
+
+  previewBtn.addEventListener('click', () => {
+    if (buildSummary()) {
+      summary.classList.add('active');
+      summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      confirmationNote.classList.remove('show');
+    }
+  });
+
+  editBtn.addEventListener('click', () => {
+    summary.classList.remove('active');
+    document.getElementById('booking-form').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  whatsappBtn.addEventListener('click', (e) => {
+    // Show confirmation note after a short delay (when WhatsApp opens)
+    setTimeout(() => {
+      confirmationNote.classList.add('show');
+    }, 500);
+  });
+
+  // Pre-fill activity from URL query param (from out-activities.html)
+  (function prefillActivity() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const activity = params.get('activity');
+      if (activity) {
+        // Add a small note in special requests
+        const req = document.getElementById('specialRequests');
+        if (req && !req.value) {
+          req.value = 'Activity: ' + activity;
+        }
+      }
+    } catch (e) {}
+  })();
 </script>
 </body>
 </html>
