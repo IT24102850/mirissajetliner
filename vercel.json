@@ -1,4 +1,12 @@
 {
   "outputDirectory": "public",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "mirissajetliner.com" }],
+      "destination": "https://www.mirissajetliner.com/$1",
+      "permanent": true
+    }
+  ]
 }
