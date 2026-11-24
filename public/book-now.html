@@ -724,6 +724,26 @@
            data-theme="dark"
            data-whatsapp="94777728439"
            data-min-height="820"><p class="booking-loading">Loading booking form…</p></div>
+      <script>
+        /* "Book Now" links elsewhere on the site add ?activity=<tour>. Open the
+           Unify form on that tour (names as they are in Unify). Runs before
+           embed.js, which reads data-service when it mounts the form. */
+        (function () {
+          var tours = {
+            'whale watching': 'Whale Watching',
+            'snorkeling': 'Snorkeling',
+            'scuba diving': 'Scuba Diving',
+            'coastal boat tour': 'Coastal Boat Tours',
+            'coastal boat tours': 'Coastal Boat Tours',
+            'photo tour': 'Photo Tours',
+            'photo tours': 'Photo Tours',
+            'deep sea fishing': 'Deep Sea Fishing'
+          };
+          var activity = (new URLSearchParams(location.search).get('activity') || '').trim().toLowerCase();
+          var host = document.querySelector('#unifyWidget [data-unify-booking]');
+          if (host && tours[activity]) host.setAttribute('data-service', tours[activity]);
+        })();
+      </script>
       <script src="https://se-3090-se-002.vercel.app/embed.js" async
               onerror="window.__unifyFailed = true; if (window.__unifyFallback) window.__unifyFallback();"></script>
     </div>
