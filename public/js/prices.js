@@ -34,7 +34,8 @@
       var text = usd !== null
         ? '≈ ' + FX.lkr(FX.toLkr(parseFloat(usd)))
         : '≈ ' + FX.usd(FX.toUsd(parseFloat(el.getAttribute('data-lkr'))));
-      var block = el.tagName === 'DIV';
+      // Block-level prices (a price heading) get the conversion on its own line.
+      var block = el.tagName === 'DIV' || getComputedStyle(el).display === 'block';
       var next = el.nextElementSibling;
       var out = next && next.classList.contains(block ? 'fx-line' : 'fx') ? next : null;
       if (!out) {
