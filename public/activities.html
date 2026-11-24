@@ -325,7 +325,14 @@
         scroll-behavior: auto !important;
       }
     }
-  </style>
+  
+    /* Private speed boat charters */
+    .charter-band { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 36px; }
+    .charter-band .activity-card { border-color: rgba(243,163,92,0.35); }
+    .charter-band .price { font-family: var(--mono); font-size: 26px; color: var(--dawn); margin: 2px 0 6px; }
+    .charter-band .price small { display: block; font-size: 13px; color: var(--mist); font-family: var(--body); margin-top: 2px; }
+    .charter-band .tag { display: inline-block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dawn-soft); border: 1px solid rgba(243,163,92,0.4); border-radius: 999px; padding: 3px 10px; margin-bottom: 10px; align-self: center; width: auto; }
+</style>
 </head>
 <body>
 
@@ -361,13 +368,33 @@
     <p>From whale watching to snorkeling and coastal cruises — every trip is crafted for adventure, comfort, and respect for the ocean.</p>
   </section>
 
+  <!-- Private speed boat charters -->
+  <section class="charter-band" aria-label="Private speed boat charters">
+    <div class="activity-card">
+      <span class="tag">Private speed boat</span>
+      <div class="icon">🐋</div>
+      <h3>Private Whale Watching</h3>
+      <div class="price">$300 <small>for the whole boat · up to 8 guests</small></div>
+      <p>An exclusive charter just for your group. Breakfast, water, king coconut, fruits and soft drinks on board; life jackets and safety insurance. Wildlife ticket LKR 6,500 per person.</p>
+      <a href="/book-now?charter=whale#booking-form" class="btn">Request Private Boat</a>
+    </div>
+    <div class="activity-card">
+      <span class="tag">Private speed boat</span>
+      <div class="icon">🎣</div>
+      <h3>Private Deep Sea Fishing</h3>
+      <div class="price">$400 <small>for the whole boat · up to 10 guests</small></div>
+      <p>Twin Suzuki 200 engines and 3 fishing rods on board. Breakfast and refreshments included; life jackets for every guest and safety insurance. Wildlife ticket LKR 6,500 per person.</p>
+      <a href="/book-now?charter=fishing#booking-form" class="btn">Request Private Boat</a>
+    </div>
+  </section>
+
   <!-- Activities Grid -->
   <section class="activities-grid">
     <div class="activity-card">
       <div class="icon">🐋</div>
       <h3>Whale Watching</h3>
-      <p>Daily dawn departures to spot blue whales, sperm whales, and dolphins. Upper-deck seating, expert crew, all-inclusive.</p>
-      <a href="/book-now?activity=Whale%20Watching" class="btn">Book Now</a>
+      <p>Daily departures at 06:30 and 10:00 to spot blue whales, sperm whales, and dolphins. Upper-deck seating, expert crew, all-inclusive. LKR 7,500 per adult, LKR 4,000 per child.</p>
+      <a href="/book-now?activity=Whale%20Watching#booking-form" class="btn">Book Now</a>
     </div>
 
     <div class="activity-card">
@@ -387,8 +414,8 @@
     <div class="activity-card">
       <div class="icon">🎣</div>
       <h3>Deep Sea Fishing</h3>
-      <p>Half-day and full-day fishing charters with experienced crew, modern tackle, and expert fish handling.</p>
-      <a href="/book-now?activity=Deep%20Sea%20Fishing" class="btn">Book Now</a>
+      <p>Private speed boat fishing charter: $400 for the whole boat, up to 10 guests, 3 fishing rods on board, experienced crew.</p>
+      <a href="/book-now?charter=fishing#booking-form" class="btn">Book Now</a>
     </div>
 
     <div class="activity-card">
