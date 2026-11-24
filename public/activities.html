@@ -325,7 +325,14 @@
         scroll-behavior: auto !important;
       }
     }
-  </style>
+  
+    /* Private speed boat charters */
+    .charter-band { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 36px; }
+    .charter-band .activity-card { border-color: rgba(243,163,92,0.35); }
+    .charter-band .price { font-family: var(--mono); font-size: 26px; color: var(--dawn); margin: 2px 0 6px; }
+    .charter-band .price small { display: block; font-size: 13px; color: var(--mist); font-family: var(--body); margin-top: 2px; }
+    .charter-band .tag { display: inline-block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dawn-soft); border: 1px solid rgba(243,163,92,0.4); border-radius: 999px; padding: 3px 10px; margin-bottom: 10px; align-self: center; width: auto; }
+</style>
 </head>
 <body>
 
@@ -361,48 +368,68 @@
     <p>From whale watching to snorkeling and coastal cruises — every trip is crafted for adventure, comfort, and respect for the ocean.</p>
   </section>
 
+  <!-- Private speed boat charters -->
+  <section class="charter-band" aria-label="Private speed boat charters">
+    <div class="activity-card">
+      <span class="tag">Private speed boat</span>
+      <div class="icon">🐋</div>
+      <h3>Private Whale Watching</h3>
+      <div class="price" data-usd="300">$300 <small>for the whole boat · up to 8 guests</small></div>
+      <p>An exclusive charter just for your group. Breakfast, water, king coconut, fruits and soft drinks on board; life jackets and safety insurance. Wildlife ticket <span data-lkr="6500">LKR 6,500</span> per person.</p>
+      <a href="/book-now?charter=whale#booking-form" class="btn">Request Private Boat</a>
+    </div>
+    <div class="activity-card">
+      <span class="tag">Private speed boat</span>
+      <div class="icon">🎣</div>
+      <h3>Private Deep Sea Fishing</h3>
+      <div class="price" data-usd="400">$400 <small>for the whole boat · up to 10 guests</small></div>
+      <p>Twin Suzuki 200 engines and 3 fishing rods on board. Breakfast and refreshments included; life jackets for every guest and safety insurance. Wildlife ticket <span data-lkr="6500">LKR 6,500</span> per person.</p>
+      <a href="/book-now?charter=fishing#booking-form" class="btn">Request Private Boat</a>
+    </div>
+  </section>
+
   <!-- Activities Grid -->
   <section class="activities-grid">
     <div class="activity-card">
       <div class="icon">🐋</div>
       <h3>Whale Watching</h3>
-      <p>Daily dawn departures to spot blue whales, sperm whales, and dolphins. Upper-deck seating, expert crew, all-inclusive.</p>
-      <a href="/book-now?activity=Whale%20Watching" class="btn">Book Now</a>
+      <p>Daily departures at 06:30 and 10:00 to spot blue whales, sperm whales, and dolphins. Upper-deck seating, expert crew, all-inclusive. <span data-lkr="7500">LKR 7,500</span> per adult, <span data-lkr="4000">LKR 4,000</span> per child, infants free.</p>
+      <a href="/book-now?activity=Whale%20Watching#booking-form" class="btn">Book Now</a>
     </div>
 
     <div class="activity-card">
       <div class="icon">🤿</div>
       <h3>Snorkeling</h3>
-      <p>Explore vibrant coral reefs and swim alongside tropical fish in protected areas. Guided small-group tours with all gear included.</p>
-      <a href="/book-now?activity=Snorkeling" class="btn">Book Now</a>
+      <p>Explore vibrant coral reefs and swim alongside tropical fish in protected areas. Guided small-group tours with all gear included. About 3 hours. <span data-lkr="6000">LKR 6,000</span> per adult, <span data-lkr="3500">LKR 3,500</span> per child.</p>
+      <a href="/book-now?activity=Snorkeling#booking-form" class="btn">Book Now</a>
     </div>
 
     <div class="activity-card">
       <div class="icon">🐠</div>
       <h3>Scuba Diving</h3>
-      <p>Certified dive operators for beginners and experienced divers. Full equipment rental and guided dives available.</p>
-      <a href="/book-now?activity=Scuba%20Diving" class="btn">Book Now</a>
+      <p>Certified dive operators for beginners and experienced divers. Full equipment rental and guided dives available. About 4 hours. <span data-lkr="12000">LKR 12,000</span> per diver, ages 12 and over.</p>
+      <a href="/book-now?activity=Scuba%20Diving#booking-form" class="btn">Book Now</a>
     </div>
 
     <div class="activity-card">
       <div class="icon">🎣</div>
       <h3>Deep Sea Fishing</h3>
-      <p>Half-day and full-day fishing charters with experienced crew, modern tackle, and expert fish handling.</p>
-      <a href="/book-now?activity=Deep%20Sea%20Fishing" class="btn">Book Now</a>
+      <p>Private speed boat charter: <span data-usd="400">$400</span> for the whole boat, up to 10 guests. Twin Suzuki 200 engines, 3 fishing rods on board, experienced crew. Wildlife ticket <span data-lkr="6500">LKR 6,500</span> per person.</p>
+      <a href="/book-now?charter=fishing#booking-form" class="btn">Request Private Boat</a>
     </div>
 
     <div class="activity-card">
       <div class="icon">⛵</div>
       <h3>Coastal Boat Tours</h3>
-      <p>Leisurely cruises for birdwatching, sunset views, and family outings. Comfortable seating with refreshments on board.</p>
-      <a href="/book-now?activity=Coastal%20Boat%20Tour" class="btn">Book Now</a>
+      <p>Leisurely cruises for birdwatching, sunset views, and family outings. Comfortable seating with refreshments on board. About 2.5 hours. <span data-lkr="5000">LKR 5,000</span> per adult, <span data-lkr="2500">LKR 2,500</span> per child.</p>
+      <a href="/book-now?activity=Coastal%20Boat%20Tours#booking-form" class="btn">Book Now</a>
     </div>
 
     <div class="activity-card">
       <div class="icon">📸</div>
       <h3>Photo Tours</h3>
-      <p>Specialized photography excursions with expert guidance to capture the perfect shot of marine life and coastal landscapes.</p>
-      <a href="/book-now?activity=Photo%20Tour" class="btn">Book Now</a>
+      <p>Specialized photography excursions with expert guidance to capture the perfect shot of marine life and coastal landscapes. About 4 hours. <span data-lkr="9500">LKR 9,500</span> per adult, <span data-lkr="5000">LKR 5,000</span> per child.</p>
+      <a href="/book-now?activity=Photo%20Tours#booking-form" class="btn">Book Now</a>
     </div>
   </section>
 </main>
@@ -463,5 +490,6 @@
     observer.observe(el);
   });
 </script>
+<script src="/js/prices.js" defer></script>
 </body>
 </html>

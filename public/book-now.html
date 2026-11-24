@@ -549,7 +549,39 @@
         scroll-behavior: auto !important;
       }
     }
-  </style>
+  
+    /* ===== Private speed boat charters ===== */
+    .section-head { text-align: center; margin: 56px auto 6px; max-width: 720px; }
+    .section-head .eyebrow { justify-content: center; }
+    .section-head h2 { font-family: var(--display); font-weight: 500; font-size: clamp(26px, 4vw, 36px); color: var(--foam); margin: 6px 0 8px; }
+    .section-head p { color: var(--mist); font-size: 15px; }
+    .charter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 26px 0 18px; }
+    .charter-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-glow); display: flex; flex-direction: column; transition: transform .3s ease, border-color .3s ease; }
+    .charter-card:hover { transform: translateY(-4px); border-color: rgba(223,243,240,0.22); }
+    .charter-card img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+    .charter-card .body { padding: 22px 22px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .charter-card h3 { font-family: var(--display); font-weight: 500; font-size: 24px; color: var(--dawn-soft); }
+    .charter-card .price { font-family: var(--mono); font-size: 30px; color: var(--dawn); }
+    .charter-card .price small { font-size: 14px; color: var(--mist); font-family: var(--body); }
+    .charter-card ul li { padding-left: 20px; position: relative; margin-bottom: 5px; color: var(--mist); font-size: 14px; }
+    .charter-card ul li::before { content: '\FF0B'; position: absolute; left: 0; color: var(--dawn); font-family: var(--mono); font-size: 12px; }
+    .charter-card .btn { margin-top: auto; align-self: flex-start; padding: 12px 28px; border-radius: 999px; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; background: var(--dawn); color: var(--abyss); transition: transform .3s ease, box-shadow .3s ease; }
+    .charter-card .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 26px -8px rgba(243,163,92,0.6); }
+    .charter-extras { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 8px; }
+    .charter-extras .tile { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+    .charter-extras .tile b { display: block; color: var(--dawn-soft); font-family: var(--mono); font-size: 18px; margin-bottom: 2px; }
+    .charter-extras .tile span { color: var(--mist); font-size: 13.5px; }
+    .charter-extras .tile a { color: var(--dawn-soft); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Shared / private switch above the booking forms */
+    .booking-switch { display: flex; gap: 6px; justify-content: center; margin: 0 auto 22px; padding: 5px; border: 1px solid var(--line); border-radius: 999px; width: max-content; max-width: 100%; background: rgba(3,13,19,.55); }
+    .booking-switch button { border: 0; background: transparent; color: var(--mist); font: 600 13px var(--body); letter-spacing: .03em; padding: 10px 18px; border-radius: 999px; cursor: pointer; }
+    .booking-switch button[aria-selected="true"] { background: var(--dawn); color: var(--abyss); }
+    .booking-pane[hidden] { display: none; }
+    .charter-note { font-size: 13px; color: var(--mist); margin: 10px 0 0; }
+    .booking-form .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+    @media (max-width: 560px) { .booking-form .row2 { grid-template-columns: 1fr; } .booking-switch button { padding: 9px 12px; font-size: 12px; } }
+</style>
 </head>
 <body>
 
@@ -582,34 +614,141 @@
   <section class="page-hero">
     <div class="eyebrow">Secure Your Spot</div>
     <h1>Book Your Adventure</h1>
-    <p>Reserve your seat on our premium whale watching vessel. All tours include breakfast, Wi-Fi, life jackets, and more.</p>
+    <p>Reserve a seat on our premium whale watching vessel, or charter a private speed boat just for your group.</p>
   </section>
 
-  <!-- Pricing -->
+  <!-- Pricing: shared boat -->
+  <div class="section-head">
+    <div class="eyebrow">Shared Boat · Daily 06:30 &amp; 10:00</div>
+    <h2>Whale Watching Tickets</h2>
+    <p>Seats on our 120-passenger upper-deck vessel from Mirissa Harbour. Breakfast, Wi-Fi, life jackets and insurance included.</p>
+  </div>
   <section class="pricing-grid">
     <div class="pricing-card">
       <h3>Adult Ticket</h3>
-      <div class="price">LKR 7,500 <small>/ person</small></div>
+      <div class="price" data-lkr="7500">LKR 7,500 <small>/ person</small></div>
       <ul>
         <li>Above 12 years</li>
         <li>Breakfast &amp; refreshments</li>
         <li>Life jacket &amp; insurance</li>
         <li>Free Wi-Fi &amp; music</li>
       </ul>
-      <a href="#booking-form" class="btn">Book Now</a>
+      <a href="#booking-form" class="btn" onclick="window.__showBooking && window.__showBooking('shared')">Book Now</a>
     </div>
     <div class="pricing-card">
       <h3>Child Ticket</h3>
-      <div class="price">LKR 4,000 <small>/ person</small></div>
+      <div class="price" data-lkr="4000">LKR 4,000 <small>/ person</small></div>
       <ul>
         <li>Below 12 years</li>
         <li>Breakfast &amp; refreshments</li>
         <li>Life jacket &amp; insurance</li>
         <li>Free Wi-Fi &amp; music</li>
       </ul>
-      <a href="#booking-form" class="btn">Book Now</a>
+      <a href="#booking-form" class="btn" onclick="window.__showBooking && window.__showBooking('shared')">Book Now</a>
     </div>
   </section>
+
+
+
+  <!-- Pricing: other shared tours (same prices as the Unify booking form) -->
+  <div class="section-head" id="other-tours">
+    <div class="eyebrow">More Tours · Season November&ndash;April</div>
+    <h2>Snorkeling, Diving, Coastal &amp; Photo Tours</h2>
+    <p>Book a place on our shared tours below. Infants travel free, and hotel pickup is free within 3&nbsp;km of Mirissa Harbour. All trips depend on the weather.</p>
+  </div>
+  <section class="pricing-grid">
+    <div class="pricing-card">
+      <h3>Snorkeling</h3>
+      <div class="price" data-lkr="6000">LKR 6,000 <small style="white-space:nowrap">/ adult</small></div>
+      <ul>
+        <li>Child (under 12): <span data-lkr="3500">LKR 3,500</span></li>
+        <li>About 3 hours</li>
+        <li>All snorkel gear, guided small group</li>
+        <li>Protected reef areas</li>
+      </ul>
+      <a href="?activity=Snorkeling#booking-form" class="btn">Book Now</a>
+    </div>
+    <div class="pricing-card">
+      <h3>Scuba Diving</h3>
+      <div class="price" data-lkr="12000">LKR 12,000 <small style="white-space:nowrap">/ diver</small></div>
+      <ul>
+        <li>Ages 12 and over</li>
+        <li>About 4 hours</li>
+        <li>Certified dive operator, guided dive</li>
+        <li>Full equipment rental</li>
+      </ul>
+      <a href="?activity=Scuba%20Diving#booking-form" class="btn">Book Now</a>
+    </div>
+    <div class="pricing-card">
+      <h3>Coastal Boat Tour</h3>
+      <div class="price" data-lkr="5000">LKR 5,000 <small style="white-space:nowrap">/ adult</small></div>
+      <ul>
+        <li>Child (under 12): <span data-lkr="2500">LKR 2,500</span></li>
+        <li>About 2.5 hours</li>
+        <li>Birdwatching &amp; sunset views</li>
+        <li>Refreshments on board</li>
+      </ul>
+      <a href="?activity=Coastal%20Boat%20Tours#booking-form" class="btn">Book Now</a>
+    </div>
+    <div class="pricing-card">
+      <h3>Photo Tour</h3>
+      <div class="price" data-lkr="9500">LKR 9,500 <small style="white-space:nowrap">/ adult</small></div>
+      <ul>
+        <li>Child (under 12): <span data-lkr="5000">LKR 5,000</span></li>
+        <li>About 4 hours</li>
+        <li>Expert photography guidance</li>
+        <li>Marine life &amp; coastal landscapes</li>
+      </ul>
+      <a href="?activity=Photo%20Tours#booking-form" class="btn">Book Now</a>
+    </div>
+  </section>
+
+  <!-- Pricing: private speed boat charters -->
+  <div class="section-head" id="private-charters">
+    <div class="eyebrow">Private Speed Boat Charters</div>
+    <h2>The Whole Boat, Just for Your Group</h2>
+    <p>Exclusive private charters with Nihal Whale Watching: whale watching, deep sea fishing, fishing tours and sunset photos.</p>
+  </div>
+  <section class="charter-grid">
+    <article class="charter-card">
+      <picture>
+        <source srcset="./images/private/private-whale-watching.webp" type="image/webp">
+        <img src="./images/private/private-whale-watching.jpg" alt="Private whale watching speed boat: $300 for the whole boat, up to 8 passengers" loading="lazy" width="1080" height="1350">
+      </picture>
+      <div class="body">
+        <h3>Private Whale Watching</h3>
+        <div class="price" data-usd="300">$300 <small>for the whole boat</small></div>
+        <ul>
+          <li>Up to 8 passengers</li>
+          <li>Whale watching, plus deep sea fishing with 3 fishing rods, fishing tours or sunset photos</li>
+          <li>Life jackets, safety insurance, toilet facilities</li>
+        </ul>
+        <a href="?charter=whale#booking-form" class="btn" data-charter="whale">Request this boat</a>
+      </div>
+    </article>
+    <article class="charter-card">
+      <picture>
+        <source srcset="./images/private/private-deep-sea-fishing.webp" type="image/webp">
+        <img src="./images/private/private-deep-sea-fishing.jpg" alt="Private deep sea fishing speed boat: $400 for the whole boat, up to 10 passengers" loading="lazy" width="1080" height="1350">
+      </picture>
+      <div class="body">
+        <h3>Private Deep Sea Fishing</h3>
+        <div class="price" data-usd="400">$400 <small>for the whole boat</small></div>
+        <ul>
+          <li>Up to 10 passengers · twin Suzuki 200 engines</li>
+          <li>3 fishing rods provided on board</li>
+          <li>Also: fishing tours, whale watching, sunset photos</li>
+          <li>Life jackets for every guest, safety insurance</li>
+        </ul>
+        <a href="?charter=fishing#booking-form" class="btn" data-charter="fishing">Request this boat</a>
+      </div>
+    </article>
+  </section>
+  <div class="charter-extras">
+    <div class="tile"><b data-lkr="6500">LKR 6,500</b><span>Wildlife ticket, per person</span></div>
+    <div class="tile"><b>On board</b><span>Breakfast, water, king coconut, fruits, Coca-Cola or Sprite</span></div>
+    <div class="tile"><b>Call or WhatsApp</b><span><a href="tel:+94777728439">+94 77 772 8439</a> · <a href="https://wa.me/94777728439" target="_blank" rel="noopener">Chat now</a></span></div>
+  </div>
 
   <!-- Booking -->
   <!-- Booking: the Unify widget.
@@ -622,12 +761,42 @@
          script src          the deployed Unify frontend + /embed.js
        Docs: unify repo -> docs/website-booking-widget.md -->
   <section class="booking-section" id="booking-form">
+    <div class="section-head" style="margin-top:20px">
+      <div class="eyebrow">Book Now</div>
+      <h2>Reserve Your Trip</h2>
+    </div>
+    <div class="booking-switch" role="tablist" aria-label="Booking type">
+      <button type="button" role="tab" id="tabShared" aria-controls="paneShared" aria-selected="true">Shared boat seats</button>
+      <button type="button" role="tab" id="tabPrivate" aria-controls="panePrivate" aria-selected="false">Private speed boat</button>
+    </div>
+
+    <div class="booking-pane" id="paneShared" role="tabpanel" aria-labelledby="tabShared">
     <div class="booking-widget" id="unifyWidget">
       <div data-unify-booking="f15bae97-fa7e-42f5-95b7-b624db319ad2"
+           data-service="Whale Watching"
            data-accent="#1b7a8c"
            data-theme="dark"
            data-whatsapp="94777728439"
            data-min-height="820"><p class="booking-loading">Loading booking form…</p></div>
+      <script>
+        /* "Book Now" links elsewhere on the site add ?activity=<tour>. Open the
+           Unify form on that tour (names as they are in Unify). Runs before
+           embed.js, which reads data-service when it mounts the form. */
+        (function () {
+          var tours = {
+            'whale watching': 'Whale Watching',
+            'snorkeling': 'Snorkeling',
+            'scuba diving': 'Scuba Diving',
+            'coastal boat tour': 'Coastal Boat Tours',
+            'coastal boat tours': 'Coastal Boat Tours',
+            'photo tour': 'Photo Tours',
+            'photo tours': 'Photo Tours'
+          };
+          var activity = (new URLSearchParams(location.search).get('activity') || '').trim().toLowerCase();
+          var host = document.querySelector('#unifyWidget [data-unify-booking]');
+          if (host && tours[activity]) host.setAttribute('data-service', tours[activity]);
+        })();
+      </script>
       <script src="https://se-3090-se-002.vercel.app/embed.js" async
               onerror="window.__unifyFailed = true; if (window.__unifyFallback) window.__unifyFallback();"></script>
     </div>
@@ -719,6 +888,83 @@
         ✅ Booking sent via WhatsApp. We'll contact you shortly to confirm.
       </div>
     </div>
+    </div>
+
+    </div><!-- /paneShared -->
+
+    <!-- Private speed boat charter request: sent to WhatsApp. -->
+    <div class="booking-pane" id="panePrivate" role="tabpanel" aria-labelledby="tabPrivate" hidden>
+      <div class="booking-form" id="charterForm">
+        <h2>Request a Private Speed Boat</h2>
+        <div class="error" id="charterError">Please enter the date, your name and a phone number.</div>
+
+        <label for="cType">Charter</label>
+        <select id="cType">
+          <option value="whale">Private Whale Watching – $300 whole boat (up to 8)</option>
+          <option value="fishing">Private Deep Sea Fishing – $400 whole boat (up to 10)</option>
+        </select>
+
+        <div class="row2">
+          <div>
+            <label for="cDate">Date</label>
+            <input type="date" id="cDate" required />
+          </div>
+          <div>
+            <label for="cTime">Preferred time</label>
+            <select id="cTime">
+              <option value="Early morning">Early morning</option>
+              <option value="Mid-morning">Mid-morning</option>
+              <option value="Afternoon">Afternoon</option>
+              <option value="Sunset">Sunset</option>
+              <option value="Flexible">Flexible</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="cGuests">Number of guests</label>
+        <select id="cGuests"></select>
+
+        <label for="cName">Full Name</label>
+        <input type="text" id="cName" placeholder="Enter your full name" autocomplete="name" required />
+
+        <div class="row2">
+          <div>
+            <label for="cPhone">Phone / WhatsApp</label>
+            <input type="tel" id="cPhone" placeholder="+94 77 000 0000" autocomplete="tel" required />
+          </div>
+          <div>
+            <label for="cEmail">Email (optional)</label>
+            <input type="email" id="cEmail" placeholder="you@example.com" autocomplete="email" />
+          </div>
+        </div>
+
+        <label for="cRequests">Extras or special requests (optional)</label>
+        <textarea id="cRequests" placeholder="Sunset photos, fishing, hotel name, celebrations…"></textarea>
+
+        <button class="btn--submit" id="cPreviewBtn" type="button">Preview Request</button>
+        <p class="charter-note">We confirm availability and the departure time with you on WhatsApp. Prefer to talk? Call <a href="tel:+94777728439" style="color:var(--dawn-soft)">+94 77 772 8439</a>.</p>
+      </div>
+
+      <div class="booking-summary" id="cSummary">
+        <h3>Charter Request</h3>
+        <div class="summary-grid">
+          <div class="label">Charter</div><div class="value" id="csType">—</div>
+          <div class="label">Date</div><div class="value" id="csDate">—</div>
+          <div class="label">Preferred time</div><div class="value" id="csTime">—</div>
+          <div class="label">Guests</div><div class="value" id="csGuests">—</div>
+          <div class="label">Name</div><div class="value" id="csName">—</div>
+          <div class="label">Phone</div><div class="value" id="csPhone">—</div>
+          <div class="label">Email</div><div class="value" id="csEmail">—</div>
+          <div class="label">Requests</div><div class="value" id="csRequests">—</div>
+          <div class="label">Private boat</div><div class="value" id="csBoat">—</div>
+          <div class="label">Wildlife tickets</div><div class="value" id="csTickets">—</div>
+        </div>
+        <div class="actions">
+          <button class="btn btn--secondary" id="cEditBtn" type="button">Edit</button>
+          <a class="btn btn--whatsapp" id="cWhatsappBtn" href="#" target="_blank" rel="noopener">Send via WhatsApp</a>
+        </div>
+        <div class="confirmation-note" id="cConfirmation">✅ Request sent via WhatsApp. We'll reply shortly to confirm your boat.</div>
+      </div>
     </div>
 
     <div class="booking-widget-foot">
@@ -894,6 +1140,129 @@
     }, 500);
   });
 
+
+  // ===== Shared / private switch =====
+  (function () {
+    var tabShared = document.getElementById('tabShared');
+    var tabPrivate = document.getElementById('tabPrivate');
+    var paneShared = document.getElementById('paneShared');
+    var panePrivate = document.getElementById('panePrivate');
+    if (!tabShared || !tabPrivate) return;
+    window.__showBooking = function (which) {
+      var priv = which === 'private';
+      tabShared.setAttribute('aria-selected', String(!priv));
+      tabPrivate.setAttribute('aria-selected', String(priv));
+      paneShared.hidden = priv;
+      panePrivate.hidden = !priv;
+    };
+    tabShared.addEventListener('click', function () { window.__showBooking('shared'); });
+    tabPrivate.addEventListener('click', function () { window.__showBooking('private'); });
+  })();
+
+  // ===== Private charter request =====
+  (function () {
+    var CHARTERS = {
+      whale:   { name: 'Private Whale Watching', boat: 300, max: 8 },
+      fishing: { name: 'Private Deep Sea Fishing', boat: 400, max: 10 }
+    };
+    var WILDLIFE_TICKET = 6500; // LKR per person
+    var $ = function (id) { return document.getElementById(id); };
+    var type = $('cType'), guests = $('cGuests'), summary = $('cSummary');
+    if (!type || !guests) return;
+
+    var today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    $('cDate').min = today.toISOString().slice(0, 10);
+
+    function fillGuests() {
+      var max = CHARTERS[type.value].max, keep = parseInt(guests.value, 10) || 2;
+      guests.innerHTML = '';
+      for (var n = 1; n <= max; n++) {
+        var o = document.createElement('option');
+        o.value = n; o.textContent = n + (n === 1 ? ' guest' : ' guests');
+        guests.appendChild(o);
+      }
+      guests.value = Math.min(keep, max);
+    }
+    type.addEventListener('change', fillGuests);
+    fillGuests();
+
+    function pick(which) {
+      if (CHARTERS[which]) { type.value = which; fillGuests(); }
+      if (window.__showBooking) window.__showBooking('private');
+    }
+    document.querySelectorAll('[data-charter]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        pick(a.getAttribute('data-charter'));
+        $('booking-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    var q = new URLSearchParams(window.location.search);
+    var act = (q.get('charter') || q.get('activity') || '').toLowerCase();
+    // Fishing is only sold as a private charter, so any fishing link opens it.
+    if (q.get('charter') || act.indexOf('private') !== -1 || act.indexOf('fish') !== -1) {
+      pick(act.indexOf('fish') !== -1 ? 'fishing' : 'whale');
+    }
+
+    function lkr(n) { return 'LKR ' + n.toLocaleString('en-US'); }
+    var fx = function () { return window.MJL_FX; };
+    function boatText(c) {
+      return '$' + c.boat + (fx() ? ' (≈ ' + fx().lkr(fx().toLkr(c.boat)) + ')' : '');
+    }
+    function ticketsText(n, total) {
+      return n + ' × ' + lkr(WILDLIFE_TICKET) + ' = ' + lkr(total) + (fx() ? ' (≈ ' + fx().usd(fx().toUsd(total)) + ')' : '');
+    }
+    function labelOptions() {
+      Array.prototype.forEach.call(type.options, function (o) {
+        var c = CHARTERS[o.value];
+        if (c) o.textContent = c.name + ' – ' + boatText(c) + ' whole boat (up to ' + c.max + ')';
+      });
+    }
+    document.addEventListener('mjl:fx', labelOptions);
+    labelOptions();
+
+    $('cPreviewBtn').addEventListener('click', function () {
+      var c = CHARTERS[type.value];
+      var date = $('cDate').value, name = $('cName').value.trim(), phone = $('cPhone').value.trim();
+      var email = $('cEmail').value.trim(), req = $('cRequests').value.trim();
+      var n = parseInt(guests.value, 10) || 1, time = $('cTime').value;
+      if (!date || !name || phone.replace(/[^0-9]/g, '').length < 6) { $('charterError').style.display = 'block'; return; }
+      $('charterError').style.display = 'none';
+
+      var tickets = n * WILDLIFE_TICKET;
+      $('csType').textContent = c.name;
+      $('csDate').textContent = date;
+      $('csTime').textContent = time;
+      $('csGuests').textContent = n + ' (max ' + c.max + ')';
+      $('csName').textContent = name;
+      $('csPhone').textContent = phone;
+      $('csEmail').textContent = email || '—';
+      $('csRequests').textContent = req || 'None';
+      $('csBoat').textContent = boatText(c) + ', whole boat';
+      $('csTickets').textContent = ticketsText(n, tickets);
+
+      var msg = [
+        'Private Speed Boat Request - mirissajetliner.com', '',
+        'Charter: ' + c.name + ' (' + boatText(c) + ' whole boat, up to ' + c.max + ')',
+        'Date: ' + date, 'Preferred time: ' + time, 'Guests: ' + n,
+        'Wildlife tickets: ' + ticketsText(n, tickets),
+        'Name: ' + name, 'Phone: ' + phone, 'Email: ' + (email || '-'),
+        'Requests: ' + (req || 'None')
+      ].join('\n');
+      $('cWhatsappBtn').href = 'https://wa.me/94777728439?text=' + encodeURIComponent(msg);
+      summary.classList.add('active');
+      $('cConfirmation').classList.remove('show');
+      summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    $('cEditBtn').addEventListener('click', function () {
+      summary.classList.remove('active');
+      $('charterForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    $('cWhatsappBtn').addEventListener('click', function () {
+      setTimeout(function () { $('cConfirmation').classList.add('show'); }, 500);
+    });
+  })();
+
   // Pre-fill activity from URL query param (from out-activities.html)
   (function prefillActivity() {
     try {
@@ -909,5 +1278,6 @@
     } catch (e) {}
   })();
 </script>
+<script src="/js/prices.js" defer></script>
 </body>
 </html>
